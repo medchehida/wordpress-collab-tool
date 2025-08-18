@@ -1,0 +1,55 @@
+[
+  {
+    "projectName": "Procom",
+    "wpPort": 8355,
+    "dbName": "Procom_db",
+    "dbPassword": "6=;zqgCHWLLtLd04",
+    "siteURL": "http://dev-server:8355",
+    "plugins": null,
+    "status": "error"
+  },
+  {
+    "projectName": "JustTesting",
+    "wpPort": 8852,
+    "dbName": "JustTesting_db",
+    "dbPassword": "ZvLR81f2z|DWW$a\u0026",
+    "siteURL": "http://192.168.122.49:8852",
+    "plugins": [
+      "woocommerce"
+    ],
+    "status": "error"
+  },
+  {
+    "projectName": "Testingg",
+    "wpPort": 8727,
+    "dbName": "Testingg_db",
+    "dbPassword": "}K{Gub2\u003e[v*F_%Cl",
+    "siteURL": "http://192.168.122.49:8727",
+    "plugins": [
+      "elementor"
+    ],
+    "status": "error"
+  },
+  {
+    "projectName": "HelloThere",
+    "wpPort": 8463,
+    "dbName": "HelloThere_db",
+    "dbPassword": "%q$3m)_Oa$qtIf4W",
+    "siteURL": "http://192.168.122.49:8463",
+    "plugins": [
+      "elementor"
+    ],
+    "status": "error"
+  },
+  {
+    "projectName": "AreyouOK",
+    "wpPort": 8275,
+    "dbName": "AreyouOK_db",
+    "dbPassword": "72HYwgn\u003cF^BF!*}L",
+    "siteURL": "http://192.168.122.49:8275",
+    "plugins": [
+      "elementor"
+    ],
+    "status": "active"
+  }
+]

@@ -1,0 +1,37 @@
+version: "3.6"
+services:
+  test-site_wordpress:
+    image: wordpress:latest
+    container_name: test-site_wordpress
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+    environment:
+      - WORDPRESS_DB_NAME=test-site_db
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_HOST=test-site_db
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=secure_password
+    depends_on:
+      test-site_db:
+        condition: service_healthy
+    restart: always
+    ports:
+      - 8623:80
+
+  test-site_db:
+    image: mariadb:latest
+    container_name: test-site_db
+    volumes:
+      - test-site_db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secure_password
+      - MYSQL_DATABASE=test-site_db
+    restart: always
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-psecure_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  test-site_db_data:
