@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import useSWR, { mutate } from "swr"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -75,19 +76,26 @@ type VPSStats = {
 
 type ViewType = "dashboard" | "sites" | "site-detail" | "login"
 
-const API_BASE_URL = "http://localhost:8081/api" // Replace with your Go backend URL
+const API_BASE_URL = "http://localhost:8081/api"
+
+const fetcher = (url: string, token: string | null) =>
+  fetch(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    if (!res.ok) {
+      const error = new Error("An error occurred while fetching the data.")
+      throw error
+    }
+    return res.json()
+  })
 
 export default function VPSSiteWeaver() {
   const [currentView, setCurrentView] = useState<ViewType>("login")
   const [selectedSite, setSelectedSite] = useState<Site | null>(null)
-  const [sites, setSites] = useState<Site[]>([])
-  const [activities, setActivities] = useState<ActivityLog[]>([])
-  const [vpsStats, setVpsStats] = useState<VPSStats | null>(null)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
-  const [isLoadingSites, setIsLoadingSites] = useState(false)
-  const [isLoadingActivities, setIsLoadingActivities] = useState(false)
-  const [isLoadingVpsStats, setIsLoadingVpsStats] = useState(false)
   const [isDeletingSite, setIsDeletingSite] = useState(false)
   const [isRestartingSite, setIsRestartingSite] = useState(false)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
@@ -95,6 +103,30 @@ export default function VPSSiteWeaver() {
   const [showPassword, setShowPassword] = useState<{ [key: string]: boolean }>({})
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
   const [token, setToken] = useState<string | null>(null)
+
+  const { data: sites = [], error: sitesError } = useSWR<Site[]>(
+    token ? [`${API_BASE_URL}/sites`, token] : null,
+    ([url, token]) => fetcher(url, token),
+    {
+      refreshInterval: 10000, // Poll every 10 seconds
+    },
+  )
+
+  const { data: activities = [], error: activitiesError } = useSWR<ActivityLog[]>(
+    token ? [`${API_BASE_URL}/activities`, token] : null,
+    ([url, token]) => fetcher(url, token),
+    {
+      refreshInterval: 10000, // Poll every 10 seconds
+    },
+  )
+
+  const { data: vpsStats, error: vpsStatsError } = useSWR<VPSStats>(
+    token ? [`${API_BASE_URL}/vps/stats`, token] : null,
+    ([url, token]) => fetcher(url, token),
+    {
+      refreshInterval: 10000, // Poll every 10 seconds
+    },
+  )
 
   // Form state for creating new site
   const [newSite, setNewSite] = useState({
@@ -119,101 +151,6 @@ export default function VPSSiteWeaver() {
     username: "",
     password: "",
   })
-
-  const fetchSites = async () => {
-    if (!token) return
-    setIsLoadingSites(true)
-    try {
-      const response = await fetch(`${API_BASE_URL}/sites`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
-      }
-      const data = await response.json()
-      setSites(data)
-    } catch (error: any) {
-      console.error("Error fetching sites:", error)
-      toast({
-        title: "Error",
-        description: `Failed to fetch sites: ${error.message || error}`,
-        variant: "destructive",
-      })
-    } finally {
-      setIsLoadingSites(false)
-    }
-  }
-
-  const fetchActivities = async () => {
-    if (!token) return
-    setIsLoadingActivities(true)
-    try {
-      const response = await fetch(`${API_BASE_URL}/activities`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
-      }
-      const data = await response.json()
-      setActivities(data)
-    } catch (error: any) {
-      console.error("Error fetching activities:", error)
-      toast({
-        title: "Error",
-        description: `Failed to fetch activities: ${error.message || error}`,
-        variant: "destructive",
-      })
-    } finally {
-      setIsLoadingActivities(false)
-    }
-  }
-
-  const fetchVPSStats = async () => {
-    if (!token) return
-    setIsLoadingVpsStats(true)
-    try {
-      const response = await fetch(`${API_BASE_URL}/vps/stats`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`)
-      }
-      const data = await response.json()
-      setVpsStats(data)
-    } catch (error: any) {
-      console.error("Error fetching VPS stats:", error)
-      toast({
-        title: "Error",
-        description: `Failed to fetch VPS stats: ${error.message || error}`,
-        variant: "destructive",
-      })
-    } finally {
-      setIsLoadingVpsStats(false)
-    }
-  }
-
-  useEffect(() => {
-    if (token) {
-      fetchSites()
-      fetchActivities()
-      fetchVPSStats()
-      const interval = setInterval(() => {
-        fetchSites()
-        fetchActivities()
-        fetchVPSStats()
-      }, 10000) // Poll every 10 seconds
-      return () => clearInterval(interval)
-    }
-  }, [token])
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -318,8 +255,8 @@ export default function VPSSiteWeaver() {
         description: data.message,
       })
       setIsCreateModalOpen(false)
-      fetchSites() // Refresh sites list
-      fetchActivities() // Refresh activities
+      mutate([`${API_BASE_URL}/sites`, token]) // Revalidate sites
+      mutate([`${API_BASE_URL}/activities`, token]) // Revalidate activities
     } catch (error: any) {
       console.error("Error creating site:", error)
       toast({
@@ -366,8 +303,8 @@ export default function VPSSiteWeaver() {
         title: "Website deleted",
         description: data.message,
       })
-      fetchSites() // Refresh sites list
-      fetchActivities() // Refresh activities
+      mutate([`${API_BASE_URL}/sites`, token]) // Revalidate sites
+      mutate([`${API_BASE_URL}/activities`, token]) // Revalidate activities
       setCurrentView("sites") // Go back to sites list after deletion
     } catch (error: any) {
       console.error("Error deleting site:", error)
@@ -401,7 +338,7 @@ export default function VPSSiteWeaver() {
         title: "Website restarted",
         description: data.message,
       })
-      fetchActivities() // Refresh activities
+      mutate([`${API_BASE_URL}/activities`, token]) // Revalidate activities
     } catch (error: any) {
       console.error("Error restarting site:", error)
       toast({
@@ -747,7 +684,7 @@ export default function VPSSiteWeaver() {
             <CardTitle className="text-sm font-medium text-slate-600">Total Active Sites</CardTitle>
           </CardHeader>
           <CardContent>
-            {isLoadingSites ? (
+            {!sites ? (
               <div className="flex items-center justify-center h-10">
                 <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
               </div>
@@ -767,7 +704,7 @@ export default function VPSSiteWeaver() {
             <CardTitle className="text-sm font-medium text-slate-600">Total Plugins</CardTitle>
           </CardHeader>
           <CardContent>
-            {isLoadingSites ? (
+            {!sites ? (
               <div className="flex items-center justify-center h-10">
                 <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
               </div>
@@ -785,7 +722,7 @@ export default function VPSSiteWeaver() {
             <CardTitle className="text-sm font-medium text-slate-600">VPS Resources</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {isLoadingVpsStats ? (
+            {!vpsStats ? (
               <div className="flex items-center justify-center h-10">
                 <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
               </div>
@@ -817,7 +754,7 @@ export default function VPSSiteWeaver() {
           <CardTitle className="text-lg font-medium text-slate-800">Recent Activity</CardTitle>
         </CardHeader>
         <CardContent>
-          {isLoadingActivities ? (
+          {!activities ? (
             <div className="flex items-center justify-center h-20">
               <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
             </div>
@@ -1008,7 +945,7 @@ export default function VPSSiteWeaver() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {isLoadingSites ? (
+            {!sites ? (
               <TableRow>
                 <TableCell colSpan={6} className="text-center py-8">
                   <Loader2 className="h-8 w-8 animate-spin text-slate-400 mx-auto" />
