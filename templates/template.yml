@@ -1,10 +1,10 @@
 version: "3.6"
 services:
   {{ .ProjectName }}_wordpress:
-    image: wordpress:latest
+    image: wordpress
     container_name: {{ .ProjectName }}_wordpress
     volumes:
-      - ./wp-content:/var/www/html/wp-content
+      - {{ .ProjectName }}_wordpress_data:/var/www/html
     environment:
       - WORDPRESS_DB_NAME={{ .DBName }}
       - WORDPRESS_TABLE_PREFIX=wp_
@@ -17,6 +17,33 @@ services:
     restart: always
     ports:
       - {{ .WPPort }}:80
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/wp-login.php"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  {{ .ProjectName }}_cli:
+    image: wordpress:cli
+    container_name: {{ .ProjectName }}_cli
+    volumes:
+      - {{ .ProjectName }}_wordpress_data:/var/www/html
+    environment:
+      - WORDPRESS_DB_NAME={{ .DBName }}
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_HOST={{ .ProjectName }}_db
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD={{ .DBPassword }}
+    depends_on:
+      - {{ .ProjectName }}_db
+      - {{ .ProjectName }}_wordpress
+    command: "tail -f /dev/null"
+    healthcheck:
+      test: ["CMD", "echo", "hello"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
 
   {{ .ProjectName }}_db:
     image: mariadb:latest
@@ -35,3 +62,4 @@ services:
 
 volumes:
   {{ .ProjectName }}_db_data:
+  {{ .ProjectName }}_wordpress_data:

@@ -684,7 +684,7 @@ export default function VPSSiteWeaver() {
             <CardTitle className="text-sm font-medium text-slate-600">Total Active Sites</CardTitle>
           </CardHeader>
           <CardContent>
-            {!sites ? (
+            {sites === undefined ? (
               <div className="flex items-center justify-center h-10">
                 <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
               </div>
@@ -704,7 +704,7 @@ export default function VPSSiteWeaver() {
             <CardTitle className="text-sm font-medium text-slate-600">Total Plugins</CardTitle>
           </CardHeader>
           <CardContent>
-            {!sites ? (
+            {sites === undefined ? (
               <div className="flex items-center justify-center h-10">
                 <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
               </div>
@@ -722,7 +722,7 @@ export default function VPSSiteWeaver() {
             <CardTitle className="text-sm font-medium text-slate-600">VPS Resources</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {!vpsStats ? (
+            {vpsStats === undefined ? (
               <div className="flex items-center justify-center h-10">
                 <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
               </div>
@@ -754,7 +754,7 @@ export default function VPSSiteWeaver() {
           <CardTitle className="text-lg font-medium text-slate-800">Recent Activity</CardTitle>
         </CardHeader>
         <CardContent>
-          {!activities ? (
+          {activities === undefined ? (
             <div className="flex items-center justify-center h-20">
               <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
             </div>

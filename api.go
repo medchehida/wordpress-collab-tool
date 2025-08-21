@@ -92,15 +92,6 @@ func createWordPressSite(c *gin.Context) {
 	logActivity(fmt.Sprintf("Site '%s' creation initiated.", projectName))
 
 	go func() {
-		// Generate the docker-compose.yml file on the local machine
-		tmpl, err := template.ParseFiles("templates/template.yml")
-		if err != nil {
-			log.Printf("Failed to parse template: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to read template file.", projectName))
-			return
-		}
-
 		sshUser := os.Getenv("SSH_USER")
 		sshHost := os.Getenv("SSH_HOST")
 		sshPassword := os.Getenv("SSH_PASSWORD")
@@ -115,33 +106,29 @@ func createWordPressSite(c *gin.Context) {
 			Password: sshPassword,
 		}
 
-		// Connect to the VPS via SSH
 		client, err := getSSHClient(sshConfig)
 		if err != nil {
 			log.Printf("Failed to connect to VPS: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to connect to VPS.", projectName))
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
 		defer client.Close()
 
+		// Generate the docker-compose.yml file on the local machine
+		tmpl, err := template.ParseFiles("templates/template.yml")
+		if err != nil {
+			log.Printf("Failed to parse template: %v", err)
+			cleanupSite(client, projectName, wpPort)
+			return
+		}
+
 		// Create the remote directory with sudo and change ownership
 		remotePath := fmt.Sprintf("/var/www/%s", projectName)
 
-		session, err := client.NewSession()
+		stdout, stderr, err := runSSHCommand(client, fmt.Sprintf("sudo mkdir -p %s && sudo chown -R %s:%s %s", remotePath, sshConfig.User, sshConfig.User, remotePath))
 		if err != nil {
-			log.Printf("Failed to create SSH session: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to create SSH session.", projectName))
-			return
-		}
-		defer session.Close()
-
-		cmd := fmt.Sprintf("sudo mkdir -p %s && sudo chown -R %s:%s %s", remotePath, sshConfig.User, sshConfig.User, remotePath)
-		if _, err := session.CombinedOutput(cmd); err != nil {
-			log.Printf("Failed to create and set ownership of remote directory: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to set up remote directory.", projectName))
+			log.Printf("Failed to create and set ownership of remote directory: %v, stdout: %s, stderr: %s", err, stdout, stderr)
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
 
@@ -149,8 +136,7 @@ func createWordPressSite(c *gin.Context) {
 		sftpClient, err := sftp.NewClient(client)
 		if err != nil {
 			log.Printf("Failed to create SFTP client: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to create SFTP client.", projectName))
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
 		defer sftpClient.Close()
@@ -159,8 +145,7 @@ func createWordPressSite(c *gin.Context) {
 		remoteFile, err := sftpClient.Create(filepath.Join(remotePath, "docker-compose.yml"))
 		if err != nil {
 			log.Printf("Failed to create remote file: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to create remote file.", projectName))
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
 		defer remoteFile.Close()
@@ -168,66 +153,83 @@ func createWordPressSite(c *gin.Context) {
 		// Execute the template and write it to the remote file
 		if err := tmpl.Execute(remoteFile, cfg); err != nil {
 			log.Printf("Failed to execute template: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to generate docker-compose file.", projectName))
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
 
-		// Create a new session to run the docker-compose command
-		session, err = client.NewSession()
+		// Run docker-compose up -d
+		log.Printf("Running docker-compose up -d in %s", remotePath)
+		stdout, stderr, err = runSSHCommand(client, fmt.Sprintf("cd %s && docker-compose up -d", remotePath))
 		if err != nil {
-			log.Printf("Failed to create SSH session: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to create SSH session.", projectName))
+			log.Printf("Failed to run docker-compose up: %v, stdout: %s, stderr: %s", err, stdout, stderr)
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
-		defer session.Close()
-
-		remoteCommand := fmt.Sprintf("cd %s && docker-compose up -d", remotePath)
-
-		output, err := session.CombinedOutput(remoteCommand)
-		if err != nil {
-			log.Printf("SSH command failed: %v, output: %s", err, string(output))
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Remote deployment failed.", projectName))
-			return
-		}
+										log.Printf("docker-compose up -d command executed. stdout: %s, stderr: %s", stdout, stderr)
+		time.Sleep(5 * time.Second)
 
 		// Wait for the WordPress container to be ready
-		time.Sleep(30 * time.Second)
+		log.Printf("Waiting for WordPress container to be ready for site '%s'...", projectName)
+		ready := false
+		for i := 0; i < 24; i++ { // 2 minutes timeout
+			containerName := fmt.Sprintf("%s_wordpress", projectName)
+			cmd := fmt.Sprintf("docker inspect --format='{{.State.Health.Status}}' %s", containerName)
+			stdout, stderr, err := runSSHCommand(client, cmd)
+			log.Printf("Checking WordPress container health: %s. Raw stdout: '%s', Raw stderr: '%s', Error: %v", cmd, stdout, stderr)
+			if err == nil && strings.TrimSpace(stdout) == "healthy" {
+				ready = true
+				break
+			}
+			log.Printf("Waiting for container to be healthy... attempt %d/24, status: %s, stderr: %s, err: %v", i+1, strings.TrimSpace(stdout), stderr, err)
+			time.Sleep(5 * time.Second)
+		}
 
-		// Install WordPress
-		session, err = client.NewSession()
-		if err != nil {
-			log.Printf("Failed to create SSH session for WP install: %v", err)
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to create SSH session for WP install.", projectName))
+		if !ready {
+			log.Printf("WordPress container for site '%s' did not become ready in time.", projectName)
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
-		defer session.Close()
+		log.Printf("WordPress container for site '%s' is ready.", projectName)
 
-		wpInstallCmd := fmt.Sprintf("cd %s && docker-compose exec wordpress wp core install --url=%s --title='%s' --admin_user='%s' --admin_password='%s' --admin_email='admin@%s.com' --skip-email", remotePath, newSite.SiteURL, projectName, adminUsername, adminPassword, projectName)
-		output, err = session.CombinedOutput(wpInstallCmd)
+		// Wait for the CLI container to be ready
+		log.Printf("Waiting for CLI container to be ready for site '%s'...", projectName)
+		ready = false
+		for i := 0; i < 24; i++ { // 2 minutes timeout
+			containerName := fmt.Sprintf("%s_cli", projectName)
+			cmd := fmt.Sprintf("docker inspect --format='{{.State.Health.Status}}' %s", containerName)
+			log.Printf("Checking CLI container health: %s. Raw stdout: '%s', Raw stderr: '%s', Error: %v", cmd, stdout, stderr)
+			stdout, stderr, err := runSSHCommand(client, cmd)
+			if err == nil && strings.TrimSpace(stdout) == "healthy" {
+				ready = true
+				break
+			}
+			log.Printf("Waiting for CLI container to be healthy... attempt %d/24, status: %s, stderr: %s, err: %v", i+1, strings.TrimSpace(stdout), stderr, err)
+			time.Sleep(5 * time.Second)
+		}
+
+		if !ready {
+			log.Printf("CLI container for site '%s' did not become ready in time.", projectName)
+			cleanupSite(client, projectName, wpPort)
+			return
+		}
+		log.Printf("CLI container for site '%s' is ready.", projectName)
+		time.Sleep(5 * time.Second)
+
+		// Install WordPress
+		wpInstallCmd := fmt.Sprintf("cd %s && docker-compose exec -T %s_cli wp core install --url=%s --title='%s' --admin_user='%s' --admin_password='%s' --admin_email='admin@%s.com' --skip-email --debug", remotePath, projectName, newSite.SiteURL, projectName, adminUsername, adminPassword, projectName)
+		stdout, stderr, err = runSSHCommand(client, wpInstallCmd)
 		if err != nil {
-			log.Printf("Failed to install WordPress: %v, output: %s", err, string(output))
-			updateSiteStatus(projectName, "error")
-			logActivity(fmt.Sprintf("Site '%s' creation failed: Failed to install WordPress.", projectName))
+			log.Printf("Failed to install WordPress for site '%s'. Command: '%s', Error: %v, stdout: %s, stderr: %s", projectName, wpInstallCmd, err, stdout, stderr)
+			cleanupSite(client, projectName, wpPort)
 			return
 		}
 
 		// Install selected plugins
 		for _, plugin := range selectedPlugins {
-			session, err := client.NewSession()
+			pluginInstallCmd := fmt.Sprintf("cd %s && docker-compose exec -T %s_cli wp plugin install %s --activate", remotePath, projectName, plugin)
+			stdout, stderr, err = runSSHCommand(client, pluginInstallCmd)
 			if err != nil {
-				log.Printf("Failed to create SSH session for plugin install: %v", err)
-				continue
-			}
-			defer session.Close()
-
-			pluginInstallCmd := fmt.Sprintf("cd %s && docker-compose exec wordpress wp plugin install %s --activate", remotePath, plugin)
-			pluginOutput, pluginErr := session.CombinedOutput(pluginInstallCmd)
-			if pluginErr != nil {
-				log.Printf("Failed to install plugin %s: %v, output: %s", plugin, pluginErr, string(pluginOutput))
+				log.Printf("Failed to install plugin %s: %v, stdout: %s, stderr: %s", plugin, err, stdout, stderr)
 				logActivity(fmt.Sprintf("Failed to install plugin '%s' on site '%s'.", plugin, projectName))
 			}
 		}
@@ -237,6 +239,24 @@ func createWordPressSite(c *gin.Context) {
 	}()
 
 	c.JSON(http.StatusOK, gin.H{"message": "WordPress deployment initiated successfully!", "url": newSite.SiteURL})
+}
+
+func runSSHCommand(client *ssh.Client, cmd string) (string, string, error) {
+	session, err := client.NewSession()
+	if err != nil {
+		return "", "", fmt.Errorf("failed to create SSH session: %w", err)
+	}
+	defer session.Close()
+
+	var stdout, stderr strings.Builder
+	session.Stdout = &stdout
+	session.Stderr = &stderr
+
+	if err := session.Run(cmd); err != nil {
+		return stdout.String(), stderr.String(), fmt.Errorf("SSH command failed: %w", err)
+	}
+
+	return stdout.String(), stderr.String(), nil
 }
 
 func updateSiteStatus(projectName, status string) {
@@ -259,13 +279,50 @@ func updateSiteStatus(projectName, status string) {
 }
 
 func generateRandomPassword(length int) string {
-	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#%^&*()-_=+[]{}|;:,.<>?"
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	seededRand := rand.New(rand.NewSource(time.Now().UnixNano()))
 	b := make([]byte, length)
 	for i := range b {
 		b[i] = charset[seededRand.Intn(len(charset))]
 	}
 	return string(b)
+}
+
+func cleanupSite(client *ssh.Client, projectName string, port int) {
+	remotePath := fmt.Sprintf("/var/www/%s", projectName)
+	log.Printf("Cleaning up site '%s'...", projectName)
+
+	// Check if the directory exists
+	_, _, err := runSSHCommand(client, fmt.Sprintf("stat %s", remotePath))
+	if err == nil {
+		// Directory exists, so run docker-compose down
+		cleanupCmd := fmt.Sprintf("cd %s && docker-compose down --volumes && cd /var/www && sudo rm -rf %s", remotePath, projectName)
+		stdout, stderr, err := runSSHCommand(client, cleanupCmd)
+		if err != nil {
+			log.Printf("Failed to cleanup site directory for '%s': %v, stdout: %s, stderr: %s", projectName, err, stdout, stderr)
+			logActivity(fmt.Sprintf("Failed to cleanup site directory for '%s'. Manual intervention may be required.", projectName))
+			// Continue with deletion even if cleanup fails
+		}
+	} else {
+		// Directory does not exist, check for orphaned container by name and status
+		log.Printf("Directory for site '%s' not found. Checking for orphaned containers.", projectName)
+		checkCmd := fmt.Sprintf("docker ps -a --filter 'name=%s_wordpress' --format '{{.Status}}'", projectName)
+		stdout, _, err := runSSHCommand(client, checkCmd)
+		if err != nil {
+			log.Printf("Failed to check for orphaned containers for site '%s': %v", projectName, err)
+		} else {
+			status := strings.TrimSpace(stdout)
+			log.Printf("Orphaned container status for '%s': %s", projectName, status)
+			// Only cleanup if the container is truly exited (not running, restarting, or paused)
+			if strings.HasPrefix(status, "Exited") {
+				stopCmd := fmt.Sprintf("docker rm %s_wordpress", projectName)
+				stdout, stderr, err := runSSHCommand(client, stopCmd)
+				if err != nil {
+					log.Printf("Failed to remove orphaned container for site '%s': %v, stdout: %s, stderr: %s", projectName, err, stdout, stderr)
+				}
+			}
+		}
+	}
 }
 
 func getWordPressSites(c *gin.Context) {
@@ -317,10 +374,12 @@ func deleteWordPressSite(c *gin.Context) {
 		return
 	}
 
+	var siteToDelete Site
 	found := false
 	updatedSites := []Site{}
 	for _, site := range sites {
 		if site.ProjectName == projectName {
+			siteToDelete = site
 			found = true
 		} else {
 			updatedSites = append(updatedSites, site)
@@ -328,8 +387,7 @@ func deleteWordPressSite(c *gin.Context) {
 	}
 
 	if !found {
-		logActivity(fmt.Sprintf("Failed to delete site '%s': Site not found.", projectName))
-		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
+		c.JSON(http.StatusOK, gin.H{"message": "Site already deleted."})
 		return
 	}
 
@@ -357,25 +415,7 @@ func deleteWordPressSite(c *gin.Context) {
 	}
 	defer client.Close()
 
-	// Stop and remove docker containers
-	remotePath := fmt.Sprintf("/var/www/%s", projectName)
-	session, err := client.NewSession()
-	if err != nil {
-		log.Printf("Failed to create SSH session: %v", err)
-		logActivity(fmt.Sprintf("Failed to delete site '%s': Failed to create SSH session.", projectName))
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create SSH session."})
-		return
-	}
-	defer session.Close()
-
-	cmd := fmt.Sprintf("cd %s && docker-compose down && rm -rf %s", remotePath, remotePath)
-	output, err := session.CombinedOutput(cmd)
-	if err != nil {
-		log.Printf("SSH command failed: %v, output: %s", err, string(output))
-		logActivity(fmt.Sprintf("Failed to delete site '%s': Remote command failed.", projectName))
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete remote site."})
-		return
-	}
+	cleanupSite(client, projectName, siteToDelete.WPPort)
 
 	if err := writeSites(updatedSites); err != nil {
 		log.Printf("Failed to write sites: %v", err)
@@ -525,7 +565,7 @@ func getSitePlugins(c *gin.Context) {
 	}
 	defer session.Close()
 
-	cmd := fmt.Sprintf("cd %s && docker-compose exec wordpress wp plugin list --field=name --format=json", remotePath)
+	cmd := fmt.Sprintf("cd %s && docker-compose exec -T %s_cli wp plugin list --field=name --format=json", remotePath, projectName)
 	output, err := session.CombinedOutput(cmd)
 	if err != nil {
 		log.Printf("SSH command failed: %v, output: %s", err, string(output))
@@ -609,7 +649,7 @@ func installPlugin(c *gin.Context) {
 	}
 	defer session.Close()
 
-	cmd := fmt.Sprintf("cd %s && docker-compose exec wordpress wp plugin install %s --activate", remotePath, pluginName)
+	cmd := fmt.Sprintf("cd %s && docker-compose exec -T %s_cli wp plugin install %s --activate", remotePath, projectName, pluginName)
 	output, err := session.CombinedOutput(cmd)
 	if err != nil {
 		log.Printf("SSH command failed: %v, output: %s", err, string(output))
@@ -685,7 +725,7 @@ func deletePlugin(c *gin.Context) {
 	}
 	defer session.Close()
 
-	cmd := fmt.Sprintf("cd %s && docker-compose exec wordpress wp plugin uninstall %s", remotePath, pluginName)
+	cmd := fmt.Sprintf("cd %s && docker-compose exec -T %s_cli wp plugin delete %s", remotePath, projectName, pluginName)
 	output, err := session.CombinedOutput(cmd)
 	if err != nil {
 		log.Printf("SSH command failed: %v, output: %s", err, string(output))
