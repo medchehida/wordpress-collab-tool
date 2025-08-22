@@ -66,7 +66,7 @@
     "dbPassword": "nM)mL(S^77K#i;2r",
     "siteURL": "http://192.168.122.49:8661",
     "plugins": null,
-    "status": "creating",
+    "status": "active",
     "adminUsername": "admin",
     "adminPassword": "vmSn22*6S8bBJtfw"
   },
@@ -612,6 +612,50 @@
     "siteURL": "http://192.168.122.49:8519",
     "plugins": null,
     "status": "creating",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin"
+  },
+  {
+    "projectName": "fuckme",
+    "wpPort": 8403,
+    "dbName": "fuckme_db",
+    "dbPassword": "udhLlj6GHAwvPEKi",
+    "siteURL": "http://192.168.122.49:8403",
+    "plugins": null,
+    "status": "creating",
+    "adminUsername": "admin",
+    "adminPassword": "UqZ\u00269k@8sQQ4n\u00262n"
+  },
+  {
+    "projectName": "gg",
+    "wpPort": 8733,
+    "dbName": "gg_db",
+    "dbPassword": "GHvN8vBY8T9oKSG2",
+    "siteURL": "http://192.168.122.49:8733",
+    "plugins": null,
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin"
+  },
+  {
+    "projectName": "TEST69",
+    "wpPort": 8368,
+    "dbName": "TEST69_db",
+    "dbPassword": "9ph9n5bUZQUtBqQT",
+    "siteURL": "http://192.168.122.49:8368",
+    "plugins": null,
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin"
+  },
+  {
+    "projectName": "amazing",
+    "wpPort": 8417,
+    "dbName": "amazing_db",
+    "dbPassword": "BI4Xk1h7PAPQGNMu",
+    "siteURL": "http://192.168.122.49:8417",
+    "plugins": null,
+    "status": "active",
     "adminUsername": "admin",
     "adminPassword": "adminadmin"
   }

@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	
+
 	"log"
 	"math/rand"
 	"net/http"
@@ -27,6 +27,7 @@ var jwtKey = []byte("my_secret_key") // Replace with a strong, random key from e
 type Config struct {
 	ProjectName string
 	WPPort      int
+	DBPort      int
 	DBName      string
 	DBPassword  string
 }
@@ -125,7 +126,7 @@ func createWordPressSite(c *gin.Context) {
 		// Create the remote directory with sudo and change ownership
 		remotePath := fmt.Sprintf("/var/www/%s", projectName)
 
-		stdout, stderr, err := runSSHCommand(client, fmt.Sprintf("sudo mkdir -p %s && sudo chown -R %s:%s %s", remotePath, sshConfig.User, sshConfig.User, remotePath))
+		stdout, stderr, err := runSSHCommand(client, fmt.Sprintf("sudo install -d -o %s -g %s %s", sshConfig.User, sshConfig.User, remotePath))
 		if err != nil {
 			log.Printf("Failed to create and set ownership of remote directory: %v, stdout: %s, stderr: %s", err, stdout, stderr)
 			cleanupSite(client, projectName, wpPort)
@@ -165,7 +166,7 @@ func createWordPressSite(c *gin.Context) {
 			cleanupSite(client, projectName, wpPort)
 			return
 		}
-										log.Printf("docker-compose up -d command executed. stdout: %s, stderr: %s", stdout, stderr)
+		log.Printf("docker-compose up -d command executed. stdout: %s, stderr: %s", stdout, stderr)
 		time.Sleep(5 * time.Second)
 
 		// Wait for the WordPress container to be ready
