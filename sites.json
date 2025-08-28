@@ -8,9 +8,10 @@
     "plugins": [
       "contact-form-7"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "KlM3XdzmmoNquQk@"
+    "adminPassword": "KlM3XdzmmoNquQk@",
+    "lastChecked": ""
   },
   {
     "projectName": "Procom",
@@ -19,9 +20,10 @@
     "dbPassword": "tcs7.)#AwIYBx+C}",
     "siteURL": "http://192.168.122.49:9051",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "F^fHLLQ%8L@TmM\u0026N"
+    "adminPassword": "F^fHLLQ%8L@TmM\u0026N",
+    "lastChecked": ""
   },
   {
     "projectName": "fuckingtesting",
@@ -30,9 +32,10 @@
     "dbPassword": "a\u003e(nKz@O?e\u003c\u003eOAy{",
     "siteURL": "http://192.168.122.49:8708",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "LOLOLOLOLOLOLOL"
+    "adminPassword": "LOLOLOLOLOLOLOL",
+    "lastChecked": ""
   },
   {
     "projectName": "test-site",
@@ -44,9 +47,10 @@
       "yoast-seo",
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "password"
+    "adminPassword": "password",
+    "lastChecked": ""
   },
   {
     "projectName": "shit",
@@ -55,9 +59,10 @@
     "dbPassword": "pFe#[y6a6OBzlXR;",
     "siteURL": "http://192.168.122.49:8216",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "04KWB@EiZw9OWOIg"
+    "adminPassword": "04KWB@EiZw9OWOIg",
+    "lastChecked": ""
   },
   {
     "projectName": "fuckme",
@@ -66,9 +71,10 @@
     "dbPassword": "nM)mL(S^77K#i;2r",
     "siteURL": "http://192.168.122.49:8661",
     "plugins": null,
-    "status": "active",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "vmSn22*6S8bBJtfw"
+    "adminPassword": "vmSn22*6S8bBJtfw",
+    "lastChecked": ""
   },
   {
     "projectName": "fucki",
@@ -79,9 +85,10 @@
     "plugins": [
       "jetpack"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "%DpTk9nGocap#g*i"
+    "adminPassword": "%DpTk9nGocap#g*i",
+    "lastChecked": ""
   },
   {
     "projectName": "please",
@@ -92,9 +99,10 @@
     "plugins": [
       "jetpack"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "R@i8SH5fvTZjX!vZ"
+    "adminPassword": "R@i8SH5fvTZjX!vZ",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -105,9 +113,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "6gCh9rwAH#E64gFu"
+    "adminPassword": "6gCh9rwAH#E64gFu",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -118,9 +127,10 @@
     "plugins": [
       "jetpack"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "9%ibNFpbMm299oQk"
+    "adminPassword": "9%ibNFpbMm299oQk",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -131,9 +141,10 @@
     "plugins": [
       "akismet"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "Qt00KkpsQ^D4Zazm"
+    "adminPassword": "Qt00KkpsQ^D4Zazm",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -144,9 +155,10 @@
     "plugins": [
       "akismet"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "ddi*Io^Y#veVlLIs"
+    "adminPassword": "ddi*Io^Y#veVlLIs",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -157,9 +169,10 @@
     "plugins": [
       "akismet"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "Zd#AM%U6^BebIRyR"
+    "adminPassword": "Zd#AM%U6^BebIRyR",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -170,9 +183,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "@aYvJU8I6P#*cwVd"
+    "adminPassword": "@aYvJU8I6P#*cwVd",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -183,9 +197,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "De%^a2XSPdL$i%Z\u0026"
+    "adminPassword": "De%^a2XSPdL$i%Z\u0026",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -196,9 +211,10 @@
     "plugins": [
       "yoast-seo"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "x%M3HPmTG%ZdKWQ8"
+    "adminPassword": "x%M3HPmTG%ZdKWQ8",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -209,9 +225,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "9%2Uy4cm!5P6*zKD"
+    "adminPassword": "9%2Uy4cm!5P6*zKD",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -222,9 +239,10 @@
     "plugins": [
       "akismet"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "wJ2GkrpC4WwS9\u00268U"
+    "adminPassword": "wJ2GkrpC4WwS9\u00268U",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -235,9 +253,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "h7D*It!tMdx4auwV"
+    "adminPassword": "h7D*It!tMdx4auwV",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -248,9 +267,10 @@
     "plugins": [
       "wp-super-cache"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "RgXIeeT5WTiBAF*2"
+    "adminPassword": "RgXIeeT5WTiBAF*2",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -261,9 +281,10 @@
     "plugins": [
       "jetpack"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "ujM9@X8mGS\u0026ww#9F"
+    "adminPassword": "ujM9@X8mGS\u0026ww#9F",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -274,9 +295,10 @@
     "plugins": [
       "jetpack"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "1fFmF7P*cAZ%fp*\u0026"
+    "adminPassword": "1fFmF7P*cAZ%fp*\u0026",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -287,9 +309,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "g1R4F^9rho9SRaDs"
+    "adminPassword": "g1R4F^9rho9SRaDs",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -300,9 +323,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "zDEnS^FLXJ2NJWha"
+    "adminPassword": "zDEnS^FLXJ2NJWha",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -313,9 +337,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "e8mqqRU892VCGji1"
+    "adminPassword": "e8mqqRU892VCGji1",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -324,9 +349,10 @@
     "dbPassword": "0B3GvKbmf4HR8yAa",
     "siteURL": "http://192.168.122.49:8740",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "dgMZrQ6wzTxbi^pA"
+    "adminPassword": "dgMZrQ6wzTxbi^pA",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -335,9 +361,10 @@
     "dbPassword": "GbU5Ply9fFERGiEu",
     "siteURL": "http://192.168.122.49:8542",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "vAYRDW9o^$9Gke!W"
+    "adminPassword": "vAYRDW9o^$9Gke!W",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -346,9 +373,10 @@
     "dbPassword": "3vOGhZVLWjp8CBGi",
     "siteURL": "http://192.168.122.49:8590",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "ztTgD2UgdA65YQFe"
+    "adminPassword": "ztTgD2UgdA65YQFe",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -357,9 +385,10 @@
     "dbPassword": "IDuBqE1MNUH1wQFg",
     "siteURL": "http://192.168.122.49:8420",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "S*!5eB7MbD7!dKOp"
+    "adminPassword": "S*!5eB7MbD7!dKOp",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -368,9 +397,10 @@
     "dbPassword": "HxzQuppWglRAUJWb",
     "siteURL": "http://192.168.122.49:8221",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "H6rTl0bgzDK1BtI\u0026"
+    "adminPassword": "H6rTl0bgzDK1BtI\u0026",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -379,9 +409,10 @@
     "dbPassword": "F39ETqD7Hsn4tzCx",
     "siteURL": "http://192.168.122.49:8684",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "pWycxJi!@#\u0026abxI6"
+    "adminPassword": "pWycxJi!@#\u0026abxI6",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -390,9 +421,10 @@
     "dbPassword": "lw2h5Q17lETxCZl3",
     "siteURL": "http://192.168.122.49:8571",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "5NYGMfutOxBpr@Zn"
+    "adminPassword": "5NYGMfutOxBpr@Zn",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -403,9 +435,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "ge1vBG5rp#e0s9WW"
+    "adminPassword": "ge1vBG5rp#e0s9WW",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -416,9 +449,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "WxhpUieNd\u0026xmG\u0026df"
+    "adminPassword": "WxhpUieNd\u0026xmG\u0026df",
+    "lastChecked": ""
   },
   {
     "projectName": "kra",
@@ -427,9 +461,10 @@
     "dbPassword": "bxnKoOkMFdYsLg8Y",
     "siteURL": "http://192.168.122.49:8563",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "RgvjznHXKWo\u0026C66n"
+    "adminPassword": "RgvjznHXKWo\u0026C66n",
+    "lastChecked": ""
   },
   {
     "projectName": "kkk",
@@ -440,9 +475,10 @@
     "plugins": [
       "contact-form-7"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "oO44\u0026GYQaHx\u0026WVhF"
+    "adminPassword": "oO44\u0026GYQaHx\u0026WVhF",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -451,9 +487,10 @@
     "dbPassword": "yLlnPTGU1kVqMazj",
     "siteURL": "http://192.168.122.49:9002",
     "plugins": null,
-    "status": "active",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "ErZeBD0jNy!Cb8bb"
+    "adminPassword": "ErZeBD0jNy!Cb8bb",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -462,9 +499,10 @@
     "dbPassword": "Ga5ScARLLmX7vRGM",
     "siteURL": "http://192.168.122.49:9093",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "adzok",
-    "adminPassword": "1WuGRP4NmhM61pL^"
+    "adminPassword": "1WuGRP4NmhM61pL^",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -473,9 +511,10 @@
     "dbPassword": "X7CZL8YwFjpRnJb6",
     "siteURL": "http://192.168.122.49:8925",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "s3@mH!X3N%QbxDJi"
+    "adminPassword": "s3@mH!X3N%QbxDJi",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -486,9 +525,10 @@
     "plugins": [
       "jetpack"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "mYmV5BnDIsJ%LnGk"
+    "adminPassword": "mYmV5BnDIsJ%LnGk",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -499,9 +539,10 @@
     "plugins": [
       "contact-form-7"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "KhspyD^NPHbi^@d9"
+    "adminPassword": "KhspyD^NPHbi^@d9",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -510,9 +551,10 @@
     "dbPassword": "n9FPqbBGYbLLUeVR",
     "siteURL": "http://192.168.122.49:9062",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "bbb",
-    "adminPassword": "ejfziufziefoenfzonf"
+    "adminPassword": "ejfziufziefoenfzonf",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -521,9 +563,10 @@
     "dbPassword": "R3RLpf84n7qMTLLu",
     "siteURL": "http://192.168.122.49:8123",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "K57tZFisVHxk\u0026wfK"
+    "adminPassword": "K57tZFisVHxk\u0026wfK",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -532,9 +575,10 @@
     "dbPassword": "zvy21eRhxEsWOF3N",
     "siteURL": "http://192.168.122.49:8467",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "password"
+    "adminPassword": "password",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -543,9 +587,10 @@
     "dbPassword": "s0pefWU6J1eqoiQ4",
     "siteURL": "http://192.168.122.49:8849",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "Uiuzi\u0026Z0hfCxkewS"
+    "adminPassword": "Uiuzi\u0026Z0hfCxkewS",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -554,9 +599,10 @@
     "dbPassword": "YrPljILS4qKA23OS",
     "siteURL": "http://192.168.122.49:8605",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "YnF5JoQbSEL12CDF"
+    "adminPassword": "YnF5JoQbSEL12CDF",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -565,9 +611,10 @@
     "dbPassword": "qtJZxCf6EE1wyTDB",
     "siteURL": "http://192.168.122.49:8612",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "2$lara^@d7KBklKD"
+    "adminPassword": "2$lara^@d7KBklKD",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -576,9 +623,10 @@
     "dbPassword": "2jvwUE7diLayaLsT",
     "siteURL": "http://192.168.122.49:8930",
     "plugins": null,
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "password"
+    "adminPassword": "password",
+    "lastChecked": ""
   },
   {
     "projectName": "bbb",
@@ -587,9 +635,10 @@
     "dbPassword": "GQhSu5WxcsLdQsTd",
     "siteURL": "http://192.168.122.49:8896",
     "plugins": null,
-    "status": "creating",
+    "status": "active",
     "adminUsername": "bbb",
-    "adminPassword": "g*IzC@0*QUz%@A^h"
+    "adminPassword": "g*IzC@0*QUz%@A^h",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -600,9 +649,10 @@
     "plugins": [
       "elementor"
     ],
-    "status": "creating",
+    "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "adminadmin"
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
   },
   {
     "projectName": "lol",
@@ -611,9 +661,10 @@
     "dbPassword": "yJ6podFlklgindcy",
     "siteURL": "http://192.168.122.49:8519",
     "plugins": null,
-    "status": "creating",
+    "status": "error",
     "adminUsername": "admin",
-    "adminPassword": "adminadmin"
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
   },
   {
     "projectName": "fuckme",
@@ -622,9 +673,10 @@
     "dbPassword": "udhLlj6GHAwvPEKi",
     "siteURL": "http://192.168.122.49:8403",
     "plugins": null,
-    "status": "creating",
+    "status": "active",
     "adminUsername": "admin",
-    "adminPassword": "UqZ\u00269k@8sQQ4n\u00262n"
+    "adminPassword": "UqZ\u00269k@8sQQ4n\u00262n",
+    "lastChecked": ""
   },
   {
     "projectName": "gg",
@@ -635,7 +687,8 @@
     "plugins": null,
     "status": "active",
     "adminUsername": "admin",
-    "adminPassword": "adminadmin"
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
   },
   {
     "projectName": "TEST69",
@@ -646,7 +699,8 @@
     "plugins": null,
     "status": "active",
     "adminUsername": "admin",
-    "adminPassword": "adminadmin"
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
   },
   {
     "projectName": "amazing",
@@ -657,6 +711,7 @@
     "plugins": null,
     "status": "active",
     "adminUsername": "admin",
-    "adminPassword": "adminadmin"
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
   }
 ]

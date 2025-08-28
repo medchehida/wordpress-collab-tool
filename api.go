@@ -3,22 +3,21 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
 	"log"
 	"math/rand"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"text/template"
 	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/sftp"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/knownhosts"
-
-	"github.com/dgrijalva/jwt-go"
 )
 
 var jwtKey = []byte("my_secret_key") // Replace with a strong, random key from environment variable in production
@@ -260,24 +259,7 @@ func runSSHCommand(client *ssh.Client, cmd string) (string, string, error) {
 	return stdout.String(), stderr.String(), nil
 }
 
-func updateSiteStatus(projectName, status string) {
-	sites, err := readSites()
-	if err != nil {
-		log.Printf("Error reading sites to update status: %v", err)
-		return
-	}
 
-	for i, site := range sites {
-		if site.ProjectName == projectName {
-			sites[i].Status = status
-			break
-		}
-	}
-
-	if err := writeSites(sites); err != nil {
-		log.Printf("Error writing sites after status update: %v", err)
-	}
-}
 
 func generateRandomPassword(length int) string {
 	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -333,32 +315,24 @@ func getWordPressSites(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
+
+	var wg sync.WaitGroup
+	for i := range sites {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			status := getSiteStatus(sites[i])
+			sites[i].Status = status
+		}(i)
+	}
+	wg.Wait()
+
+	if err := writeSites(sites); err != nil {
+		log.Printf("Error writing sites after status update: %v", err)
+		// Continue with the request even if writing fails
+	}
+
 	c.JSON(http.StatusOK, sites)
-}
-
-func getWordPressSite(c *gin.Context) {
-	projectName := c.Param("projectName")
-	if projectName == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Project name is required."})
-		return
-	}
-
-	sites, err := readSites()
-	if err != nil {
-		logActivity(fmt.Sprintf("Failed to retrieve site '%s': Error reading sites file.", projectName))
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
-		return
-	}
-
-	for _, site := range sites {
-		if site.ProjectName == projectName {
-			c.JSON(http.StatusOK, site)
-			return
-		}
-	}
-
-	logActivity(fmt.Sprintf("Failed to retrieve site '%s': Site not found.", projectName))
-	c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 }
 
 func deleteWordPressSite(c *gin.Context) {
@@ -780,7 +754,7 @@ func getVPSStats(c *gin.Context) {
 	}
 	defer session.Close()
 
-	cpuCmd := "top -bn1 | grep \"%Cpu(s)\" | awk '{print $2 + $4}'"
+	cpuCmd := "top -bn1 | grep '%Cpu(s)' | awk '{print $2 + $4}'"
 	cpuOutput, err := session.CombinedOutput(cpuCmd)
 	if err != nil {
 		log.Printf("SSH command failed for CPU: %v, output: %s", err, string(cpuOutput))
@@ -901,4 +875,58 @@ func getSSHClient(config *SSHConfig) (*ssh.Client, error) {
 		HostKeyCallback: hostKeyCallback,
 	}
 	return ssh.Dial("tcp", config.Host+":22", sshConfig)
+}
+
+func getWordPressSite(c *gin.Context) {
+	projectName := c.Param("projectName")
+	if projectName == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Project name is required."})
+		return
+	}
+
+	sites, err := readSites()
+	if err != nil {
+		logActivity(fmt.Sprintf("Failed to retrieve site '%s': Error reading sites file.", projectName))
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
+		return
+	}
+
+	var foundSite *Site
+	for i := range sites {
+		if sites[i].ProjectName == projectName {
+			status := getSiteStatus(sites[i])
+			sites[i].Status = status
+			foundSite = &sites[i]
+			break
+		}
+	}
+
+	if foundSite == nil {
+		logActivity(fmt.Sprintf("Failed to retrieve site '%s': Site not found.", projectName))
+		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
+		return
+	}
+
+	if err := writeSites(sites); err != nil {
+		log.Printf("Error writing sites after status update: %v", err)
+		// Continue with the request even if writing fails
+	}
+
+	c.JSON(http.StatusOK, foundSite)
+}
+
+func getSiteStatus(site Site) string {
+	resp, err := http.Get(site.SiteURL)
+	if err != nil {
+		log.Printf("Failed to ping site %s: %v", site.ProjectName, err)
+		return "down"
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
+		return "active"
+	}
+
+	log.Printf("Site %s returned status code %d", site.ProjectName, resp.StatusCode)
+	return "error"
 }

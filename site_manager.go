@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"sync"
+	"time"
 )
 
 // Site represents a deployed WordPress site.
@@ -19,6 +21,7 @@ type Site struct {
 	Status        string   `json:"status"`
 	AdminUsername string   `json:"adminUsername"`
 	AdminPassword string   `json:"adminPassword"`
+	LastChecked   string   `json:"lastChecked"`
 }
 
 var (
@@ -62,4 +65,24 @@ func writeSites(sites []Site) error {
 	}
 
 	return nil
+}
+
+func updateSiteStatus(projectName, status string) {
+	sites, err := readSites()
+	if err != nil {
+		log.Printf("Error reading sites to update status: %v", err)
+		return
+	}
+
+	for i, site := range sites {
+		if site.ProjectName == projectName {
+			sites[i].Status = status
+			sites[i].LastChecked = time.Now().Format(time.RFC3339)
+			break
+		}
+	}
+
+	if err := writeSites(sites); err != nil {
+		log.Printf("Error writing sites after status update: %v", err)
+	}
 }

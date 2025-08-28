@@ -59,9 +59,10 @@ type Site = {
   dbPassword: string
   siteURL: string
   plugins: string[]
-  status: "active" | "error" | "creating"
+  status: "active" | "error" | "creating" | "down"
   adminUsername: string
   adminPassword: string
+  lastChecked: string
 }
 
 type ActivityLog = {
@@ -160,6 +161,8 @@ export default function VPSSiteWeaver() {
         return <Badge className="bg-red-100 text-red-800 hover:bg-red-100">Error</Badge>
       case "creating":
         return <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100">Creating</Badge>
+      case "down":
+        return <Badge className="bg-gray-100 text-gray-800 hover:bg-gray-100">Down</Badge>
       default:
         return <Badge variant="secondary">Unknown</Badge>
     }
@@ -459,8 +462,21 @@ export default function VPSSiteWeaver() {
 
         <div className="ml-auto flex items-center space-x-4">
           <div className="flex items-center space-x-2 text-sm">
-            <div className="h-2 w-2 rounded-full bg-green-500"></div>
-            <span className="text-slate-600">VPS: Online</span>
+            {!vpsStats && !vpsStatsError ? (
+              <Loader2 className="h-4 w-4 animate-spin text-slate-400" />
+            ) : vpsStatsError ? (
+              <div className="h-2 w-2 rounded-full bg-red-500"></div>
+            ) : (
+              <div className="h-2 w-2 rounded-full bg-green-500"></div>
+            )}
+            <span className="text-slate-600">
+              VPS:{" "}
+              {!vpsStats && !vpsStatsError
+                ? "Loading..."
+                : vpsStatsError
+                ? "Offline"
+                : "Online"}
+            </span>
           </div>
 
           <Button variant="ghost" size="icon" className="text-slate-600 hover:text-slate-800">
@@ -940,7 +956,7 @@ export default function VPSSiteWeaver() {
               <TableHead className="text-slate-600 font-medium">Site Name</TableHead>
               <TableHead className="text-slate-600 font-medium">URL</TableHead>
               <TableHead className="text-slate-600 font-medium">IP Address</TableHead>
-              <TableHead className="text-slate-600 font-medium">Created</TableHead>
+              <TableHead className="text-slate-600 font-medium">Last Checked</TableHead>
               <TableHead className="text-slate-600 font-medium w-12"></TableHead>
             </TableRow>
           </TableHeader>
@@ -1008,7 +1024,9 @@ export default function VPSSiteWeaver() {
                       </Button>
                     </div>
                   </TableCell>
-                  <TableCell className="py-3 text-slate-600">N/A</TableCell> {/* CreatedOn is not returned by backend */}
+                  <TableCell className="py-3 text-slate-600">
+                    {site.lastChecked ? new Date(site.lastChecked).toLocaleString() : "N/A"}
+                  </TableCell>
                   <TableCell className="py-3">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -1207,7 +1225,7 @@ export default function VPSSiteWeaver() {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center space-x-2 mb-2">{getStatusBadge(selectedSite.status)}</div>
-                <p className="text-slate-500 text-sm">Last checked: {new Date().toLocaleTimeString()}</p>
+                <p className="text-slate-500 text-sm">Last checked: {selectedSite.lastChecked ? new Date(selectedSite.lastChecked).toLocaleString() : "N/A"}</p>
               </CardContent>
             </Card>
 
