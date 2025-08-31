@@ -1,4 +1,4 @@
-module myfirst-go-app
+module wordpress-collab-tool
 
 go 1.24.5
 

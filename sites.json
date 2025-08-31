@@ -525,7 +525,7 @@
     "plugins": [
       "jetpack"
     ],
-    "status": "down",
+    "status": "active",
     "adminUsername": "admin",
     "adminPassword": "mYmV5BnDIsJ%LnGk",
     "lastChecked": ""
@@ -713,5 +713,31 @@
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
     "lastChecked": ""
+  },
+  {
+    "projectName": "newwebsite",
+    "wpPort": 8155,
+    "dbName": "newwebsite_db",
+    "dbPassword": "i6pepWZ)yw8hEe9a",
+    "siteURL": "http://192.168.122.49:8155",
+    "plugins": null,
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "password",
+    "lastChecked": "2025-08-28T19:50:50+01:00"
+  },
+  {
+    "projectName": "vvv",
+    "wpPort": 8156,
+    "dbName": "vvv_db",
+    "dbPassword": "Ltls40bIEi$zylUv",
+    "siteURL": "http://192.168.122.49:8156",
+    "plugins": [
+      "elementor"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-08-31T18:01:08+01:00"
   }
 ]
