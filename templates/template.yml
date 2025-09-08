@@ -17,6 +17,8 @@ services:
     restart: always
     ports:
       - {{ .WPPort }}:80
+    dns:
+      - 8.8.8.8
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/wp-login.php"]
       interval: 10s
@@ -25,6 +27,7 @@ services:
 
   {{ .ProjectName }}_cli:
     image: wordpress:cli
+    user: "33:33"
     container_name: {{ .ProjectName }}_cli
     volumes:
       - {{ .ProjectName }}_wordpress_data:/var/www/html
@@ -38,6 +41,8 @@ services:
       - {{ .ProjectName }}_db
       - {{ .ProjectName }}_wordpress
     command: "tail -f /dev/null"
+    dns:
+      - 8.8.8.8
     healthcheck:
       test: ["CMD", "echo", "hello"]
       interval: 10s

@@ -3,19 +3,17 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	
 	"net/http"
-	
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/dgrijalva/jwt-go"
-	"github.com/gin-gonic/gin"
 	"wordpress-collab-tool/config" // Import config
 	"wordpress-collab-tool/models"
 	"wordpress-collab-tool/services"
 	"wordpress-collab-tool/utils"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
 )
 
 var jwtKey = []byte("your_secret_key") // TODO: Load from config/environment variable
@@ -33,7 +31,6 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials."})
 		return
 	}
-
 	expirationTime := time.Now().Add(8 * time.Hour)
 	claims := &models.Claims{
 		Username: user.Username,
@@ -41,14 +38,12 @@ func Login(c *gin.Context) {
 			ExpiresAt: expirationTime.Unix(),
 		},
 	}
-
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not generate token."})
 		return
 	}
-
 	c.JSON(http.StatusOK, gin.H{"message": "Login successful!", "token": tokenString})
 }
 
@@ -87,10 +82,16 @@ func AuthMiddleware() gin.HandlerFunc {
 
 // CreateWordPressSite handles the request to create a new WordPress site.
 func CreateWordPressSite(c *gin.Context) {
-	projectName := c.PostForm("projectName")
-	selectedPlugins := c.PostFormArray("selectedPlugins")
-	adminUsername := c.PostForm("adminUsername")
-	adminPassword := c.PostForm("adminPassword")
+	// Ensure the form is parsed
+	if err := c.Request.ParseMultipartForm(10 << 20); err != nil { // 10 MB max memory
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to parse form."})
+		return
+	}
+
+	projectName := c.Request.FormValue("projectName")
+	selectedPlugins := c.Request.Form["selectedPlugins"]
+	adminUsername := c.Request.FormValue("adminUsername")
+	adminPassword := c.Request.FormValue("adminPassword")
 
 	if projectName == "" || adminUsername == "" || adminPassword == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Project name, admin username, and admin password are required."})
@@ -132,16 +133,16 @@ func CreateWordPressSite(c *gin.Context) {
 	services.LogActivity(fmt.Sprintf("Site '%s' creation initiated.", projectName))
 
 	go func() {
-		err := services.DeployWordPressSite(newSite, selectedPlugins, adminUsername, adminPassword)
+		err := services.DeployWordPressSite(newSite, newSite.Plugins, newSite.AdminUsername, newSite.AdminPassword)
 		if err != nil {
-			utils.LogError("Failed to deploy WordPress site '%s': %v", projectName, err)
-			services.UpdateSiteStatus(projectName, "failed")
-			services.LogActivity(fmt.Sprintf("Site '%s' creation failed: %v", projectName, err))
+			utils.LogError("Failed to deploy WordPress site '%s': %v", newSite.ProjectName, err)
+			services.UpdateSiteStatus(newSite.ProjectName, "failed")
+			services.LogActivity(fmt.Sprintf("Site '%s' creation failed: %v", newSite.ProjectName, err))
 			// TODO: Implement cleanup if deployment fails
 			return
 		}
-		services.UpdateSiteStatus(projectName, "active")
-		services.LogActivity(fmt.Sprintf("Site '%s' created successfully! URL: %s", projectName, newSite.SiteURL))
+		services.UpdateSiteStatus(newSite.ProjectName, "active")
+		services.LogActivity(fmt.Sprintf("Site '%s' created successfully! URL: %s", newSite.ProjectName, newSite.SiteURL))
 	}()
 
 	c.JSON(http.StatusOK, gin.H{"message": "WordPress deployment initiated successfully!", "url": newSite.SiteURL})

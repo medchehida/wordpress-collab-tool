@@ -1,743 +1,386 @@
 [
   {
-    "projectName": "JustTesting",
-    "wpPort": 8443,
-    "dbName": "JustTesting_db",
-    "dbPassword": "V{Vx;:.W-!Gy)?a]",
-    "siteURL": "http://192.168.122.49:8443",
-    "plugins": [
-      "contact-form-7"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "KlM3XdzmmoNquQk@",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "Procom",
-    "wpPort": 9051,
-    "dbName": "Procom_db",
-    "dbPassword": "tcs7.)#AwIYBx+C}",
-    "siteURL": "http://192.168.122.49:9051",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "F^fHLLQ%8L@TmM\u0026N",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "fuckingtesting",
-    "wpPort": 8708,
-    "dbName": "fuckingtesting_db",
-    "dbPassword": "a\u003e(nKz@O?e\u003c\u003eOAy{",
-    "siteURL": "http://192.168.122.49:8708",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "LOLOLOLOLOLOLOL",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "test-site",
-    "wpPort": 8456,
-    "dbName": "test-site_db",
-    "dbPassword": "+y(m4K\u003e.@\u003e]=}6)B",
-    "siteURL": "http://192.168.122.49:8456",
+    "projectName": "FirstEverWebsite",
+    "wpPort": 8100,
+    "dbName": "FirstEverWebsite_db",
+    "dbPassword": "7YzJdrsy(q4y%Qhx",
+    "siteURL": "http://192.168.122.227:8100",
     "plugins": [
       "yoast-seo",
+      "woocommerce",
       "elementor"
     ],
     "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "password",
-    "lastChecked": ""
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-06T17:59:04+01:00"
   },
   {
-    "projectName": "shit",
-    "wpPort": 8216,
-    "dbName": "shit_db",
-    "dbPassword": "pFe#[y6a6OBzlXR;",
-    "siteURL": "http://192.168.122.49:8216",
+    "projectName": "what",
+    "wpPort": 8101,
+    "dbName": "what_db",
+    "dbPassword": "\u0026B$kliBTe8fLvbqG",
+    "siteURL": "http://192.168.122.227:8101",
+    "plugins": [
+      "elementor",
+      "woocommerce"
+    ],
+    "status": "down",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-06T18:03:57+01:00"
+  },
+  {
+    "projectName": "Testingg",
+    "wpPort": 8102,
+    "dbName": "Testingg_db",
+    "dbPassword": "$r!zHIhhfvC5O(0D",
+    "siteURL": "http://192.168.122.227:8102",
     "plugins": null,
     "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "04KWB@EiZw9OWOIg",
-    "lastChecked": ""
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-06T18:12:26+01:00"
   },
   {
-    "projectName": "fuckme",
-    "wpPort": 8661,
-    "dbName": "fuckme_db",
-    "dbPassword": "nM)mL(S^77K#i;2r",
-    "siteURL": "http://192.168.122.49:8661",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "vmSn22*6S8bBJtfw",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "fucki",
-    "wpPort": 8398,
-    "dbName": "fucki_db",
-    "dbPassword": "z6bO)t(vBQo4xTG)",
-    "siteURL": "http://192.168.122.49:8398",
+    "projectName": "finally",
+    "wpPort": 8103,
+    "dbName": "finally_db",
+    "dbPassword": "8@JPG%HhENNAYLc%",
+    "siteURL": "http://192.168.122.227:8103",
     "plugins": [
-      "jetpack"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "%DpTk9nGocap#g*i",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "please",
-    "wpPort": 8181,
-    "dbName": "please_db",
-    "dbPassword": "N]aae{aEWxiLH0:T",
-    "siteURL": "http://192.168.122.49:8181",
-    "plugins": [
-      "jetpack"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "R@i8SH5fvTZjX!vZ",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 9080,
-    "dbName": "lol_db",
-    "dbPassword": "r==H2ljvp^w4^4{}",
-    "siteURL": "http://192.168.122.49:9080",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "6gCh9rwAH#E64gFu",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8779,
-    "dbName": "lol_db",
-    "dbPassword": "1?0*b9xWuaE9^uB(",
-    "siteURL": "http://192.168.122.49:8779",
-    "plugins": [
-      "jetpack"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "9%ibNFpbMm299oQk",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8892,
-    "dbName": "lol_db",
-    "dbPassword": ".h_!a.xhoRo(mPi@",
-    "siteURL": "http://192.168.122.49:8892",
-    "plugins": [
-      "akismet"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "Qt00KkpsQ^D4Zazm",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8834,
-    "dbName": "lol_db",
-    "dbPassword": ":kof7a?8Pwn9#JgP",
-    "siteURL": "http://192.168.122.49:8834",
-    "plugins": [
-      "akismet"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "ddi*Io^Y#veVlLIs",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 9015,
-    "dbName": "lol_db",
-    "dbPassword": "L*5zz={y{jzUdoLg",
-    "siteURL": "http://192.168.122.49:9015",
-    "plugins": [
-      "akismet"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "Zd#AM%U6^BebIRyR",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8825,
-    "dbName": "lol_db",
-    "dbPassword": "ZhwUijc1S}g7ab(t",
-    "siteURL": "http://192.168.122.49:8825",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "@aYvJU8I6P#*cwVd",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8786,
-    "dbName": "lol_db",
-    "dbPassword": "2\u003czHOl}5=STJ.hzE",
-    "siteURL": "http://192.168.122.49:8786",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "De%^a2XSPdL$i%Z\u0026",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 9087,
-    "dbName": "lol_db",
-    "dbPassword": "\u003e!TBH+Ynh}zE8[n(",
-    "siteURL": "http://192.168.122.49:9087",
-    "plugins": [
-      "yoast-seo"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "x%M3HPmTG%ZdKWQ8",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8951,
-    "dbName": "lol_db",
-    "dbPassword": "O{NlL7EWBS6XC,]\u003e",
-    "siteURL": "http://192.168.122.49:8951",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "9%2Uy4cm!5P6*zKD",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8961,
-    "dbName": "lol_db",
-    "dbPassword": "3.Q+%swTR+D[hlw)",
-    "siteURL": "http://192.168.122.49:8961",
-    "plugins": [
-      "akismet"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "wJ2GkrpC4WwS9\u00268U",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8957,
-    "dbName": "lol_db",
-    "dbPassword": "Tc[j\u003ewHJ[h.|Fx8:",
-    "siteURL": "http://192.168.122.49:8957",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "h7D*It!tMdx4auwV",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8516,
-    "dbName": "lol_db",
-    "dbPassword": "v_s[\u003e8-itQOF}Cht",
-    "siteURL": "http://192.168.122.49:8516",
-    "plugins": [
-      "wp-super-cache"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "RgXIeeT5WTiBAF*2",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8163,
-    "dbName": "lol_db",
-    "dbPassword": "LD0pg7II5aiy589X",
-    "siteURL": "http://192.168.122.49:8163",
-    "plugins": [
-      "jetpack"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "ujM9@X8mGS\u0026ww#9F",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8700,
-    "dbName": "lol_db",
-    "dbPassword": "o29F1fDFVs7KsKoT",
-    "siteURL": "http://192.168.122.49:8700",
-    "plugins": [
-      "jetpack"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "1fFmF7P*cAZ%fp*\u0026",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 9010,
-    "dbName": "lol_db",
-    "dbPassword": "X0TyD1wm6aUXhpOS",
-    "siteURL": "http://192.168.122.49:9010",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "g1R4F^9rho9SRaDs",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8274,
-    "dbName": "lol_db",
-    "dbPassword": "4wIhTIi9KoQ3Bx2u",
-    "siteURL": "http://192.168.122.49:8274",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "zDEnS^FLXJ2NJWha",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8485,
-    "dbName": "lol_db",
-    "dbPassword": "imzaCqeXyVxk1V8u",
-    "siteURL": "http://192.168.122.49:8485",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "e8mqqRU892VCGji1",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8740,
-    "dbName": "lol_db",
-    "dbPassword": "0B3GvKbmf4HR8yAa",
-    "siteURL": "http://192.168.122.49:8740",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "dgMZrQ6wzTxbi^pA",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8542,
-    "dbName": "lol_db",
-    "dbPassword": "GbU5Ply9fFERGiEu",
-    "siteURL": "http://192.168.122.49:8542",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "vAYRDW9o^$9Gke!W",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8590,
-    "dbName": "lol_db",
-    "dbPassword": "3vOGhZVLWjp8CBGi",
-    "siteURL": "http://192.168.122.49:8590",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "ztTgD2UgdA65YQFe",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8420,
-    "dbName": "lol_db",
-    "dbPassword": "IDuBqE1MNUH1wQFg",
-    "siteURL": "http://192.168.122.49:8420",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "S*!5eB7MbD7!dKOp",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8221,
-    "dbName": "lol_db",
-    "dbPassword": "HxzQuppWglRAUJWb",
-    "siteURL": "http://192.168.122.49:8221",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "H6rTl0bgzDK1BtI\u0026",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8684,
-    "dbName": "lol_db",
-    "dbPassword": "F39ETqD7Hsn4tzCx",
-    "siteURL": "http://192.168.122.49:8684",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "pWycxJi!@#\u0026abxI6",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8571,
-    "dbName": "lol_db",
-    "dbPassword": "lw2h5Q17lETxCZl3",
-    "siteURL": "http://192.168.122.49:8571",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "5NYGMfutOxBpr@Zn",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8269,
-    "dbName": "lol_db",
-    "dbPassword": "RiARazifyDi6qsmc",
-    "siteURL": "http://192.168.122.49:8269",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "ge1vBG5rp#e0s9WW",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8131,
-    "dbName": "lol_db",
-    "dbPassword": "UXFwOpIDkXnnuXGQ",
-    "siteURL": "http://192.168.122.49:8131",
-    "plugins": [
-      "elementor"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "WxhpUieNd\u0026xmG\u0026df",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "kra",
-    "wpPort": 8563,
-    "dbName": "kra_db",
-    "dbPassword": "bxnKoOkMFdYsLg8Y",
-    "siteURL": "http://192.168.122.49:8563",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "RgvjznHXKWo\u0026C66n",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "kkk",
-    "wpPort": 8195,
-    "dbName": "kkk_db",
-    "dbPassword": "lP9Vi0AVuRYIZ62e",
-    "siteURL": "http://192.168.122.49:8195",
-    "plugins": [
+      "woocommerce",
       "contact-form-7"
     ],
     "status": "down",
     "adminUsername": "admin",
-    "adminPassword": "oO44\u0026GYQaHx\u0026WVhF",
-    "lastChecked": ""
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-06T18:15:10+01:00"
   },
   {
-    "projectName": "bbb",
-    "wpPort": 9002,
-    "dbName": "bbb_db",
-    "dbPassword": "yLlnPTGU1kVqMazj",
-    "siteURL": "http://192.168.122.49:9002",
+    "projectName": "wtf",
+    "wpPort": 8104,
+    "dbName": "wtf_db",
+    "dbPassword": "XbMs5jV7XpE@PDf1",
+    "siteURL": "http://192.168.122.227:8104",
     "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "ErZeBD0jNy!Cb8bb",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 9093,
-    "dbName": "bbb_db",
-    "dbPassword": "Ga5ScARLLmX7vRGM",
-    "siteURL": "http://192.168.122.49:9093",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "adzok",
-    "adminPassword": "1WuGRP4NmhM61pL^",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8925,
-    "dbName": "bbb_db",
-    "dbPassword": "X7CZL8YwFjpRnJb6",
-    "siteURL": "http://192.168.122.49:8925",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "s3@mH!X3N%QbxDJi",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8156,
-    "dbName": "bbb_db",
-    "dbPassword": "GMKCXiKXyqWk5Gpc",
-    "siteURL": "http://192.168.122.49:8156",
-    "plugins": [
-      "jetpack"
-    ],
-    "status": "active",
-    "adminUsername": "admin",
-    "adminPassword": "mYmV5BnDIsJ%LnGk",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8702,
-    "dbName": "bbb_db",
-    "dbPassword": "mhtTYXK6jQ09qACs",
-    "siteURL": "http://192.168.122.49:8702",
-    "plugins": [
-      "contact-form-7"
-    ],
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "KhspyD^NPHbi^@d9",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 9062,
-    "dbName": "bbb_db",
-    "dbPassword": "n9FPqbBGYbLLUeVR",
-    "siteURL": "http://192.168.122.49:9062",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "bbb",
-    "adminPassword": "ejfziufziefoenfzonf",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8123,
-    "dbName": "bbb_db",
-    "dbPassword": "R3RLpf84n7qMTLLu",
-    "siteURL": "http://192.168.122.49:8123",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "K57tZFisVHxk\u0026wfK",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8467,
-    "dbName": "bbb_db",
-    "dbPassword": "zvy21eRhxEsWOF3N",
-    "siteURL": "http://192.168.122.49:8467",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "password",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8849,
-    "dbName": "bbb_db",
-    "dbPassword": "s0pefWU6J1eqoiQ4",
-    "siteURL": "http://192.168.122.49:8849",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "Uiuzi\u0026Z0hfCxkewS",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8605,
-    "dbName": "bbb_db",
-    "dbPassword": "YrPljILS4qKA23OS",
-    "siteURL": "http://192.168.122.49:8605",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "YnF5JoQbSEL12CDF",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8612,
-    "dbName": "bbb_db",
-    "dbPassword": "qtJZxCf6EE1wyTDB",
-    "siteURL": "http://192.168.122.49:8612",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "2$lara^@d7KBklKD",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8930,
-    "dbName": "bbb_db",
-    "dbPassword": "2jvwUE7diLayaLsT",
-    "siteURL": "http://192.168.122.49:8930",
-    "plugins": null,
-    "status": "down",
-    "adminUsername": "admin",
-    "adminPassword": "password",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "bbb",
-    "wpPort": 8896,
-    "dbName": "bbb_db",
-    "dbPassword": "GQhSu5WxcsLdQsTd",
-    "siteURL": "http://192.168.122.49:8896",
-    "plugins": null,
-    "status": "active",
-    "adminUsername": "bbb",
-    "adminPassword": "g*IzC@0*QUz%@A^h",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "lol",
-    "wpPort": 8623,
-    "dbName": "lol_db",
-    "dbPassword": "jPmvNJAD4tkDu7yM",
-    "siteURL": "http://192.168.122.49:8623",
-    "plugins": [
-      "elementor"
-    ],
     "status": "down",
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
-    "lastChecked": ""
+    "lastChecked": "2025-09-06T18:16:20+01:00"
   },
   {
-    "projectName": "lol",
-    "wpPort": 8519,
-    "dbName": "lol_db",
-    "dbPassword": "yJ6podFlklgindcy",
-    "siteURL": "http://192.168.122.49:8519",
+    "projectName": "bbb",
+    "wpPort": 8105,
+    "dbName": "bbb_db",
+    "dbPassword": "X)m(ZQ81jgguSj2i",
+    "siteURL": "http://192.168.122.227:8105",
     "plugins": null,
-    "status": "error",
+    "status": "down",
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
-    "lastChecked": ""
+    "lastChecked": "2025-09-08T11:46:33+01:00"
   },
   {
-    "projectName": "fuckme",
-    "wpPort": 8403,
-    "dbName": "fuckme_db",
-    "dbPassword": "udhLlj6GHAwvPEKi",
-    "siteURL": "http://192.168.122.49:8403",
+    "projectName": "jjj",
+    "wpPort": 8106,
+    "dbName": "jjj_db",
+    "dbPassword": "xrz!x%d6$QcWRvpD",
+    "siteURL": "http://192.168.122.227:8106",
     "plugins": null,
-    "status": "active",
-    "adminUsername": "admin",
-    "adminPassword": "UqZ\u00269k@8sQQ4n\u00262n",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "gg",
-    "wpPort": 8733,
-    "dbName": "gg_db",
-    "dbPassword": "GHvN8vBY8T9oKSG2",
-    "siteURL": "http://192.168.122.49:8733",
-    "plugins": null,
-    "status": "active",
+    "status": "down",
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "TEST69",
-    "wpPort": 8368,
-    "dbName": "TEST69_db",
-    "dbPassword": "9ph9n5bUZQUtBqQT",
-    "siteURL": "http://192.168.122.49:8368",
-    "plugins": null,
-    "status": "active",
-    "adminUsername": "admin",
-    "adminPassword": "adminadmin",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "amazing",
-    "wpPort": 8417,
-    "dbName": "amazing_db",
-    "dbPassword": "BI4Xk1h7PAPQGNMu",
-    "siteURL": "http://192.168.122.49:8417",
-    "plugins": null,
-    "status": "active",
-    "adminUsername": "admin",
-    "adminPassword": "adminadmin",
-    "lastChecked": ""
-  },
-  {
-    "projectName": "newwebsite",
-    "wpPort": 8155,
-    "dbName": "newwebsite_db",
-    "dbPassword": "i6pepWZ)yw8hEe9a",
-    "siteURL": "http://192.168.122.49:8155",
-    "plugins": null,
-    "status": "active",
-    "adminUsername": "admin",
-    "adminPassword": "password",
-    "lastChecked": "2025-08-28T19:50:50+01:00"
+    "lastChecked": "2025-09-06T18:25:38+01:00"
   },
   {
     "projectName": "vvv",
-    "wpPort": 8156,
+    "wpPort": 8107,
     "dbName": "vvv_db",
-    "dbPassword": "Ltls40bIEi$zylUv",
-    "siteURL": "http://192.168.122.49:8156",
+    "dbPassword": "%zVuYP$)YfXBru1s",
+    "siteURL": "http://192.168.122.227:8107",
     "plugins": [
+      "elementor"
+    ],
+    "status": "down",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-06T18:32:43+01:00"
+  },
+  {
+    "projectName": "kkk",
+    "wpPort": 8108,
+    "dbName": "kkk_db",
+    "dbPassword": "Il\u0026FLOScMO)IFMUy",
+    "siteURL": "http://192.168.122.227:8108",
+    "plugins": [
+      "elementor"
+    ],
+    "status": "down",
+    "adminUsername": "admin",
+    "adminPassword": "adminamin",
+    "lastChecked": "2025-09-06T18:37:05+01:00"
+  },
+  {
+    "projectName": "hhh",
+    "wpPort": 8109,
+    "dbName": "hhh_db",
+    "dbPassword": "grIpqk(LJCp8HYBF",
+    "siteURL": "http://192.168.122.227:8109",
+    "plugins": [
+      "jetpack"
+    ],
+    "status": "down",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-06T18:40:28+01:00"
+  },
+  {
+    "projectName": "sss",
+    "wpPort": 8110,
+    "dbName": "sss_db",
+    "dbPassword": "CkDjnhm6mXcN3u\u0026Q",
+    "siteURL": "http://192.168.122.227:8110",
+    "plugins": [
+      "jetpack"
+    ],
+    "status": "down",
+    "adminUsername": "admin",
+    "adminPassword": "password",
+    "lastChecked": "2025-09-06T18:46:13+01:00"
+  },
+  {
+    "projectName": "fff",
+    "wpPort": 8111,
+    "dbName": "fff_db",
+    "dbPassword": ")kAyQRFHAaiuAJiH",
+    "siteURL": "http://192.168.122.227:8111",
+    "plugins": [
+      "contact-form-7"
+    ],
+    "status": "down",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
+  },
+  {
+    "projectName": "lll",
+    "wpPort": 8112,
+    "dbName": "lll_db",
+    "dbPassword": "mYfh$CZBb0Jgn1ql",
+    "siteURL": "http://192.168.122.227:8112",
+    "plugins": [
+      "woocommerce"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-07T18:28:15+01:00"
+  },
+  {
+    "projectName": "aaa",
+    "wpPort": 8113,
+    "dbName": "aaa_db",
+    "dbPassword": "#ZN^QNCTs0QOiWuX",
+    "siteURL": "http://192.168.122.227:8113",
+    "plugins": null,
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-07T18:33:15+01:00"
+  },
+  {
+    "projectName": "nnn",
+    "wpPort": 8114,
+    "dbName": "nnn_db",
+    "dbPassword": "LQJpP2dJ%WOJlkKv",
+    "siteURL": "http://192.168.122.227:8114",
+    "plugins": [
+      "woocommerce",
+      "elementor",
+      "contact-form-7",
+      "jetpack"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-07T18:38:21+01:00"
+  },
+  {
+    "projectName": "zzz",
+    "wpPort": 8115,
+    "dbName": "zzz_db",
+    "dbPassword": "EwPDye73Dvw3j^79",
+    "siteURL": "http://192.168.122.227:8115",
+    "plugins": [
+      "updraftplus",
+      "contact-form-7",
+      "woocommerce",
+      "elementor",
+      "jetpack"
+    ],
+    "status": "error",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-07T18:52:48+01:00"
+  },
+  {
+    "projectName": "ppp",
+    "wpPort": 8116,
+    "dbName": "ppp_db",
+    "dbPassword": "bn9voMmVGrS@2*OF",
+    "siteURL": "http://192.168.122.227:8116",
+    "plugins": [
+      "woocommerce",
+      "contact-form-7",
+      "elementor",
+      "jetpack"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-07T19:04:15+01:00"
+  },
+  {
+    "projectName": "xxx",
+    "wpPort": 8117,
+    "dbName": "xxx_db",
+    "dbPassword": "**Y)O4vSiOA1byOs",
+    "siteURL": "http://192.168.122.227:8117",
+    "plugins": [
+      "woocommerce",
+      "updraftplus",
+      "jetpack",
+      "contact-form-7",
       "elementor"
     ],
     "status": "active",
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
-    "lastChecked": "2025-08-31T18:01:08+01:00"
+    "lastChecked": "2025-09-07T19:11:50+01:00"
+  },
+  {
+    "projectName": "ttt",
+    "wpPort": 8118,
+    "dbName": "ttt_db",
+    "dbPassword": "99KHO1VqJu!KK$!h",
+    "siteURL": "http://192.168.122.227:8118",
+    "plugins": [
+      "woocommerce",
+      "jetpack",
+      "contact-form-7",
+      "elementor",
+      "updraftplus"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-07T19:15:27+01:00"
+  },
+  {
+    "projectName": "www",
+    "wpPort": 8119,
+    "dbName": "www_db",
+    "dbPassword": "Rwmq67wMkgLw2wMx",
+    "siteURL": "http://192.168.122.227:8119",
+    "plugins": [
+      "woocommerce",
+      "contact-form-7",
+      "jetpack"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
+  },
+  {
+    "projectName": "test",
+    "wpPort": 8120,
+    "dbName": "test_db",
+    "dbPassword": "jRh7NvQeTvmLxNRo",
+    "siteURL": "http://192.168.122.227:8120",
+    "plugins": [
+      "woocommerce",
+      "contact-form-7",
+      "elementor",
+      "jetpack",
+      "updraftplus"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-07T19:31:00+01:00"
+  },
+  {
+    "projectName": "bbb",
+    "wpPort": 8121,
+    "dbName": "bbb_db",
+    "dbPassword": "jDO*8HHD1N@6xAy%",
+    "siteURL": "http://192.168.122.227:8121",
+    "plugins": [
+      "woocommerce",
+      "contact-form-7",
+      "jetpack"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
+  },
+  {
+    "projectName": "uuu",
+    "wpPort": 8122,
+    "dbName": "uuu_db",
+    "dbPassword": "^3$WXsCnB4GfgQtV",
+    "siteURL": "http://192.168.122.227:8122",
+    "plugins": [
+      "woocommerce"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-08T11:53:09+01:00"
+  },
+  {
+    "projectName": "ggg",
+    "wpPort": 8123,
+    "dbName": "ggg_db",
+    "dbPassword": "0w)OFteg%BY2SRPl",
+    "siteURL": "http://192.168.122.227:8123",
+    "plugins": [
+      "woocommerce"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-08T12:47:59+01:00"
+  },
+  {
+    "projectName": "ddd",
+    "wpPort": 8124,
+    "dbName": "ddd_db",
+    "dbPassword": "v@LBFA%bkpI3mR#!",
+    "siteURL": "http://192.168.122.227:8124",
+    "plugins": [
+      "woocommerce"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "password",
+    "lastChecked": "2025-09-08T12:55:33+01:00"
+  },
+  {
+    "projectName": "mmm",
+    "wpPort": 8125,
+    "dbName": "mmm_db",
+    "dbPassword": "#SH^$4qM!0t(v$j@",
+    "siteURL": "http://192.168.122.227:8125",
+    "plugins": [
+      "woocommerce"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-08T12:58:39+01:00"
   }
 ]
