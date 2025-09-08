@@ -91,7 +91,7 @@
     "status": "down",
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
-    "lastChecked": "2025-09-06T18:25:38+01:00"
+    "lastChecked": "2025-09-08T18:24:20+01:00"
   },
   {
     "projectName": "vvv",
@@ -382,5 +382,46 @@
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
     "lastChecked": "2025-09-08T12:58:39+01:00"
+  },
+  {
+    "projectName": "jjj",
+    "wpPort": 8126,
+    "dbName": "jjj_db",
+    "dbPassword": ")x70Gj8q16!(xE6(",
+    "siteURL": "http://192.168.122.227:8126",
+    "plugins": [
+      "yoast-seo",
+      "woocommerce",
+      "akismet",
+      "updraftplus",
+      "jetpack",
+      "contact-form-7",
+      "elementor"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": ""
+  },
+  {
+    "projectName": "ccc",
+    "wpPort": 8127,
+    "dbName": "ccc_db",
+    "dbPassword": "gN#7xS^\u0026GxZKd$3#",
+    "siteURL": "http://192.168.122.227:8127",
+    "plugins": [
+      "wordpress-seo",
+      "woocommerce",
+      "akismet",
+      "wp-super-cache",
+      "elementor",
+      "contact-form-7",
+      "jetpack",
+      "updraftplus"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-08T18:32:49+01:00"
   }
 ]

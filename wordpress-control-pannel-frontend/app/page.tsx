@@ -430,7 +430,7 @@ export default function VPSSiteWeaver() {
   }
 
   const availablePlugins = [
-    "yoast-seo", // Use slug for WP-CLI
+    "wordpress-seo", // Use slug for WP-CLI
     "elementor",
     "woocommerce",
     "contact-form-7",

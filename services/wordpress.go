@@ -267,6 +267,7 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 		time.Sleep(10 * time.Second)
 		utils.LogInfo("Starting plugin installation for site '%s'.", site.ProjectName)
 
+		var installErrors []string
 		for _, plugin := range selectedPlugins {
 			pluginInstallCmd := fmt.Sprintf("cd %s && docker compose exec -T %s_cli wp plugin install %s --activate", remotePath, site.ProjectName, plugin)
 			stdout, stderr, err := RunSSHCommand(sshClient, pluginInstallCmd)
@@ -274,12 +275,17 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 				errMessage := fmt.Sprintf("failed to install plugin '%s' for site '%s'. Error: %v, stdout: %s, stderr: %s", plugin, site.ProjectName, err, stdout, stderr)
 				utils.LogError(errMessage)
 				LogActivity(fmt.Sprintf("Failed to install plugin '%s' on site '%s'.", plugin, site.ProjectName))
-				// Return an error to stop the deployment and notify the user
-				return fmt.Errorf(errMessage)
+				installErrors = append(installErrors, errMessage)
+			} else {
+				utils.LogInfo("Plugin '%s' installed successfully on site '%s'.", plugin, site.ProjectName)
+				LogActivity(fmt.Sprintf("Plugin '%s' installed successfully on site '%s'.", plugin, site.ProjectName))
 			}
-			utils.LogInfo("Plugin '%s' installed successfully on site '%s'.", plugin, site.ProjectName)
-			LogActivity(fmt.Sprintf("Plugin '%s' installed successfully on site '%s'.", plugin, site.ProjectName))
 		}
+
+		if len(installErrors) > 0 {
+			return fmt.Errorf("encountered errors during plugin installation:\n%s", strings.Join(installErrors, "\n"))
+		}
+
 		utils.LogInfo("All plugins installed successfully for site '%s'.", site.ProjectName)
 	}
 
