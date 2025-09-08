@@ -423,5 +423,21 @@
     "adminUsername": "admin",
     "adminPassword": "adminadmin",
     "lastChecked": "2025-09-08T18:32:49+01:00"
+  },
+  {
+    "projectName": "qqq",
+    "wpPort": 8128,
+    "dbName": "qqq_db",
+    "dbPassword": "z0uUd\u0026cpvBi)6$m@",
+    "siteURL": "http://192.168.122.227:8128",
+    "plugins": [
+      "wordpress-seo",
+      "woocommerce",
+      "elementor"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-08T20:54:24+01:00"
   }
 ]

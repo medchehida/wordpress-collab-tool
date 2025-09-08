@@ -160,7 +160,7 @@ func CleanupSite(client *ssh.Client, projectName string, wpPort int) {
 	if client != nil {
 		remotePath := fmt.Sprintf("/var/www/%s", projectName)
 		// Stop and remove docker containers
-		RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose down", remotePath))
+				RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml down", remotePath, remotePath))
 		// Remove remote directory
 		RunSSHCommand(client, fmt.Sprintf("sudo rm -rf %s", remotePath))
 	}
@@ -230,7 +230,7 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 
 	// Run docker compose up -d
 	utils.LogInfo("Executing command: cd %s && docker compose up -d", remotePath)
-	stdout, stderr, err = RunSSHCommand(sshClient, fmt.Sprintf("cd %s && docker compose up -d", remotePath))
+	stdout, stderr, err = RunSSHCommand(sshClient, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml up -d", remotePath, remotePath))
 	if err != nil {
 		return fmt.Errorf("failed to run docker compose up: %w, stdout: %s, stderr: %s", err, stdout, stderr)
 	}
@@ -239,21 +239,21 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 
 	// Wait for the WordPress container to be ready
 	utils.LogInfo("Waiting for WordPress container to be ready for site '%s'...", site.ProjectName)
-	if err := waitForContainerHealthy(sshClient, site.ProjectName, "_wordpress"); err != nil {
+	if err := waitForContainerHealthy(sshClient, site.ProjectName, "_wordpress", remotePath); err != nil {
 		return fmt.Errorf("WordPress container did not become ready: %w", err)
 	}
 	utils.LogInfo("WordPress container for site '%s' is ready.", site.ProjectName)
 
 	// Wait for the CLI container to be ready
 	utils.LogInfo("Waiting for CLI container to be ready for site '%s'...", site.ProjectName)
-	if err := waitForContainerHealthy(sshClient, site.ProjectName, "_cli"); err != nil {
+	if err := waitForContainerHealthy(sshClient, site.ProjectName, "_cli", remotePath); err != nil {
 		return fmt.Errorf("CLI container did not become ready: %w", err)
 	}
 	utils.LogInfo("CLI container for site '%s' is ready.", site.ProjectName)
 	time.Sleep(5 * time.Second) // Give CLI container a moment to be fully ready
 
 	// Install WordPress
-	wpInstallCmd := fmt.Sprintf("cd %s && docker compose exec -T --user www-data %s_cli wp core install --url=%s --title='%s' --admin_user='%s' --admin_password='%s' --admin_email='admin@%s.com' --skip-email --debug", remotePath, site.ProjectName, site.SiteURL, site.ProjectName, adminUsername, adminPassword, site.ProjectName)
+	wpInstallCmd := fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T --user www-data %s_cli wp core install --url=%s --title='%s' --admin_user='%s' --admin_password='%s' --admin_email='admin@%s.com' --skip-email --debug", remotePath, remotePath, site.ProjectName, site.SiteURL, site.ProjectName, adminUsername, adminPassword, site.ProjectName)
 	utils.LogInfo("Executing WordPress install command: %s", wpInstallCmd)
 	stdout, stderr, err = RunSSHCommand(sshClient, wpInstallCmd)
 	if err != nil {
@@ -269,7 +269,7 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 
 		var installErrors []string
 		for _, plugin := range selectedPlugins {
-			pluginInstallCmd := fmt.Sprintf("cd %s && docker compose exec -T %s_cli wp plugin install %s --activate", remotePath, site.ProjectName, plugin)
+			pluginInstallCmd := fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin install %s --activate", remotePath, remotePath, site.ProjectName, plugin)
 			stdout, stderr, err := RunSSHCommand(sshClient, pluginInstallCmd)
 			if err != nil {
 				errMessage := fmt.Sprintf("failed to install plugin '%s' for site '%s'. Error: %v, stdout: %s, stderr: %s", plugin, site.ProjectName, err, stdout, stderr)
@@ -293,10 +293,10 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 }
 
 // waitForContainerHealthy waits for a specific container to report a "healthy" status.
-func waitForContainerHealthy(client *ssh.Client, projectName, suffix string) error {
+func waitForContainerHealthy(client *ssh.Client, projectName, suffix, remotePath string) error {
 	containerName := fmt.Sprintf("%s%s", projectName, suffix)
 	for i := 0; i < 24; i++ { // 2 minutes timeout (24 * 5 seconds)
-		cmd := fmt.Sprintf("docker inspect --format='{{.State.Health.Status}}' %s", containerName)
+		cmd := fmt.Sprintf("docker compose -f %s/docker-compose.yml inspect --format='{{.State.Health.Status}}' %s", remotePath, containerName)
 		stdout, stderr, err := RunSSHCommand(client, cmd)
 		if err == nil && strings.TrimSpace(stdout) == "healthy" {
 			return nil
@@ -321,3 +321,4 @@ func GetSiteStatus(site models.Site) string {
 
 	return "error"
 }
+

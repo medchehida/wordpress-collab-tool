@@ -65,6 +65,14 @@ type Site = {
   lastChecked: string
 }
 
+type Plugin = {
+  name: string;
+  status: "active" | "inactive";
+  version: string;
+  update: "available" | "none";
+  author: string;
+};
+
 type ActivityLog = {
   action: string
   timestamp: string
@@ -123,6 +131,14 @@ export default function VPSSiteWeaver() {
 
   const { data: vpsStats, error: vpsStatsError } = useSWR<VPSStats>(
     token ? [`${API_BASE_URL}/vps/stats`, token] : null,
+    ([url, token]) => fetcher(url, token),
+    {
+      refreshInterval: 10000, // Poll every 10 seconds
+    },
+  )
+
+  const { data: plugins = [], error: pluginsError } = useSWR<Plugin[]>(
+    token && selectedSite ? [`${API_BASE_URL}/sites/${selectedSite.projectName}/plugins`, token] : null,
     ([url, token]) => fetcher(url, token),
     {
       refreshInterval: 10000, // Poll every 10 seconds
@@ -425,12 +441,43 @@ export default function VPSSiteWeaver() {
     }
   }
 
+  const handlePluginToggle = async (pluginName: string, isActive: boolean) => {
+    const action = isActive ? "deactivate" : "activate";
+    try {
+      const response = await fetch(`${API_BASE_URL}/sites/${selectedSite?.projectName}/plugins/${pluginName}/${action}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      toast({
+        title: `Plugin ${action}d`,
+        description: data.message,
+      });
+      mutate([`${API_BASE_URL}/sites/${selectedSite?.projectName}/plugins`, token]); // Revalidate plugins
+    } catch (error: any) {
+      console.error(`Error ${action}ing plugin:`, error);
+      toast({
+        title: "Error",
+        description: `Failed to ${action} plugin: ${error.message || error}`,
+        variant: "destructive",
+      });
+    }
+  };
+
   const togglePasswordVisibility = (key: string) => {
     setShowPassword((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
   const availablePlugins = [
-    "wordpress-seo", // Use slug for WP-CLI
+    "wordpress-seo",
     "elementor",
     "woocommerce",
     "contact-form-7",
@@ -1129,8 +1176,8 @@ export default function VPSSiteWeaver() {
                       <ExternalLink className="h-3 w-3" />
                     </Button>
                   </div>
-                </div
-                ><div>
+                </div>
+                <div>
                   <Label className="text-slate-600 text-sm">IP Address</Label>
                   <div className="flex items-center space-x-2">
                     <p className="text-slate-800 font-medium">N/A</p> {/* IP Address is not returned by backend */}
@@ -1229,26 +1276,33 @@ export default function VPSSiteWeaver() {
               </CardContent>
             </Card>
 
-            {selectedSite.plugins && selectedSite.plugins.length > 0 && (
-              <Card className="shadow-sm">
-                <CardHeader>
-                  <CardTitle className="text-lg font-medium text-slate-800">Active Plugins</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {selectedSite.plugins.map((plugin, index) => (
+            <Card className="shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-lg font-medium text-slate-800">Active Plugins</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {pluginsError ? (
+                    <p className="text-red-500">Failed to load plugins.</p>
+                  ) : !plugins ? (
+                    <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
+                  ) : (
+                    plugins.map((plugin, index) => (
                       <div
                         key={index}
                         className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0"
                       >
-                        <span className="text-slate-700">{plugin}</span>
-                        <Switch defaultChecked /> {/* This switch doesn't do anything yet */}
+                        <span className="text-slate-700">{plugin.name}</span>
+                        <Switch
+                          checked={plugin.status === "active"}
+                          onCheckedChange={() => handlePluginToggle(plugin.name, plugin.status === "active")}
+                        />
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+                    ))
+                  )}
+                </div>
+              </CardContent>
+            </Card>
 
             <Card className="shadow-sm border-red-200">
               <CardHeader>

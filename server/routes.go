@@ -22,6 +22,8 @@ func SetupRoutes(router *gin.Engine) {
 		auth.GET("/sites/:projectName/plugins", controllers.GetSitePlugins)
 		auth.POST("/sites/:projectName/plugins/:pluginName", controllers.InstallPlugin)
 		auth.DELETE(" /sites/:projectName/plugins/:pluginName", controllers.DeletePlugin)
+		auth.POST("/sites/:projectName/plugins/:pluginName/activate", controllers.ActivatePlugin)
+		auth.POST("/sites/:projectName/plugins/:pluginName/deactivate", controllers.DeactivatePlugin)
 		auth.GET("/vps/stats", controllers.GetVPSStats)
 		auth.GET("/activities", controllers.GetActivities)
 	}
