@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"net/http"
 	"strings"
 	"sync"
@@ -80,6 +81,23 @@ func AuthMiddleware() gin.HandlerFunc {
 	}
 }
 
+func generateUniquePort(sites []models.Site, minPort, maxPort int) int {
+	rand.Seed(time.Now().UnixNano())
+	for {
+		port := rand.Intn(maxPort-minPort+1) + minPort
+		isUsed := false
+		for _, site := range sites {
+			if site.WPPort == port {
+				isUsed = true
+				break
+			}
+		}
+		if !isUsed {
+			return port
+		}
+	}
+}
+
 // CreateWordPressSite handles the request to create a new WordPress site.
 func CreateWordPressSite(c *gin.Context) {
 	// Ensure the form is parsed
@@ -98,8 +116,14 @@ func CreateWordPressSite(c *gin.Context) {
 		return
 	}
 
-	// TODO: Generate a random port (int) and ensure uniqueness
-	wpPort := 8100 + len(services.ReadSitesOrEmpty()) // Simple placeholder for now
+	sites, err := services.ReadSites()
+	if err != nil {
+		utils.LogError("Failed to read sites: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save site information."})
+		return
+	}
+
+	wpPort := generateUniquePort(sites, 8100, 9000)
 
 	dbName := fmt.Sprintf("%s_db", projectName)
 	dbPassword := services.GenerateRandomPassword(16)
@@ -116,12 +140,6 @@ func CreateWordPressSite(c *gin.Context) {
 		AdminPassword: adminPassword,
 	}
 
-	sites, err := services.ReadSites()
-	if err != nil {
-		utils.LogError("Failed to read sites: %v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save site information."})
-		return
-	}
 	sites = append(sites, newSite)
 
 	if err := services.WriteSites(sites); err != nil {
@@ -322,6 +340,78 @@ func RestartWordPressSite(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Site restarted successfully!"})
 }
 
+// CreateBackup creates a backup of a WordPress site.
+func CreateBackup(c *gin.Context) {
+	projectName := c.Param("projectName")
+	if projectName == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Project name is required."})
+		return
+	}
+
+	go func() {
+		err := services.CreateBackup(projectName)
+		if err != nil {
+			utils.LogError("Failed to create backup for site '%s': %v", projectName, err)
+			// Optionally, log this failure as an activity
+			services.LogActivity(fmt.Sprintf("Backup failed for site '%s': %v", projectName, err))
+		}
+	}()
+
+	c.JSON(http.StatusOK, gin.H{"message": "Backup creation initiated successfully!"})
+}
+
+// ListBackups lists the backups for a WordPress site.
+func ListBackups(c *gin.Context) {
+	projectName := c.Param("projectName")
+	if projectName == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Project name is required."})
+		return
+	}
+
+	backups, err := services.ListBackups(projectName)
+	if err != nil {
+		utils.LogError("Failed to list backups for site '%s': %v", projectName, err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to list backups.", "details": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, backups)
+}
+
+// RestoreBackup restores a backup of a WordPress site.
+func RestoreBackup(c *gin.Context) {
+	projectName := c.Param("projectName")
+	if projectName == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Project name is required."})
+		return
+	}
+
+	var payload struct {
+		BackupFile string `json:"backupFile"`
+	}
+
+	if err := c.ShouldBindJSON(&payload); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload. 'backupFile' is required."})
+		return
+	}
+
+	backupFile := payload.BackupFile
+	if backupFile == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Backup file name is required."})
+		return
+	}
+
+	go func() {
+		err := services.RestoreBackup(projectName, backupFile)
+		if err != nil {
+			utils.LogError("Failed to restore backup for site '%s': %v", projectName, err)
+			services.LogActivity(fmt.Sprintf("Restore failed for site '%s': %v", projectName, err))
+		}
+	}()
+
+	c.JSON(http.StatusOK, gin.H{"message": "Backup restoration initiated successfully!"})
+}
+
 // GetSitePlugins retrieves a list of plugins for a site.
 func GetSitePlugins(c *gin.Context) {
 	projectName := c.Param("projectName")
@@ -362,7 +452,7 @@ func GetSitePlugins(c *gin.Context) {
 	defer client.Close()
 
 	remotePath := fmt.Sprintf("/var/www/%s", projectName)
-	stdout, stderr, err := services.RunSSHCommand(client, fmt.Sprintf("cd %s && which docker-compose && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin list --format=json", remotePath, remotePath, projectName))
+	stdout, stderr, err := services.RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin list --format=json", remotePath, remotePath, projectName))
 	if err != nil {
 		utils.LogError("SSH command failed: %v, output: %s", err, stdout+stderr)
 		services.LogActivity(fmt.Sprintf("Failed to list plugins for site '%s': Remote command failed.", projectName))
@@ -371,15 +461,8 @@ func GetSitePlugins(c *gin.Context) {
 	}
 
 	var plugins []map[string]interface{}
-	pluginOutput := strings.SplitN(stdout, "\n", 2)
-	if len(pluginOutput) < 2 {
-		utils.LogError("Unexpected output format for plugins: %s", stdout)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse plugin list: Unexpected output format."})
-		return
-	}
-	jsonOutput := pluginOutput[1]
-	if err := json.Unmarshal([]byte(jsonOutput), &plugins); err != nil {
-		utils.LogError("Failed to unmarshal plugins: %v", err)
+	if err := json.Unmarshal([]byte(stdout), &plugins); err != nil {
+		utils.LogError("Failed to unmarshal plugins: %v. Raw output: %s", err, stdout)
 		services.LogActivity(fmt.Sprintf("Failed to list plugins for site '%s': Failed to parse plugin list.", projectName))
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse plugin list."})
 		return
@@ -654,5 +737,7 @@ func GetActivities(c *gin.Context) {
 
 	c.JSON(http.StatusOK, activities)
 }
+
+
 
 

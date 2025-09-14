@@ -40,6 +40,7 @@ services:
     depends_on:
       - {{ .ProjectName }}_db
       - {{ .ProjectName }}_wordpress
+    restart: always
     command: "tail -f /dev/null"
     dns:
       - 8.8.8.8

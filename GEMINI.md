@@ -50,3 +50,21 @@ This project is a web-based tool for managing WordPress instances on a Virtual P
 6.  **Data Storage:**
     *   `sites.json`: Acts as a simple database to keep track of the managed sites.
     *   `activities.json`: Stores a log of all actions.
+
+## Backup & Restore Feature Roadmap
+
+### Phase 1: Backend API for Backups
+- [x] **Step 1: Implement the Core Backup Logic in Go.**
+    - This function will first ensure the backup directory `/var/www/backups/[projectName]` exists using `mkdir -p`. Then, it will perform the backup.
+- [x] **Step 2: Create the `POST` API Endpoint.**
+- [x_ **Step 3: Create the `GET` "List Backups" Endpoint.**
+
+### Phase 2: Frontend UI for Managing Backups
+- [x] **Step 4: Build the "Backups" Card.**
+- [x] **Step 5: Add the "Create Backup" Button.**
+- [x] **Step 6: Display the List of Backups.**
+
+### Phase 3: Restore Functionality
+- [ ] **Step 7: Implement the Core Restore Logic in Go.**
+- [ ] **Step 8: Create the `POST` API Endpoint for Restoring.**
+- [ ] **Step 9: Connect the "Restore" Button to the API.**

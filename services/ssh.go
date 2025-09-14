@@ -19,8 +19,8 @@ func GetSSHClient(cfg *config.Config) (*ssh.Client, error) {
 		Auth: []ssh.AuthMethod{
 			ssh.Password(cfg.SSHPassword),
 		},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(), // TODO: Implement proper host key verification
-		Timeout:         10 * time.Second,
+		    HostKeyCallback: ssh.InsecureIgnoreHostKey(), // TODO: Implement proper host key verification
+		Timeout:         5 * time.Minute,
 	}
 
 	client, err := ssh.Dial("tcp", fmt.Sprintf("%s:22", cfg.SSHHost), sshConfig)
@@ -45,13 +45,23 @@ func RunSSHCommand(client *ssh.Client, command string) (string, string, error) {
 	session.Stdout = &stdoutBuf
 	session.Stderr = &stderrBuf
 
-	utils.LogInfo("Executing SSH command: %s", command)
+	isSilent := strings.Contains(command, "top -bn1") || strings.Contains(command, "free -m")
+
+	if !isSilent {
+		utils.LogInfo("Executing SSH command: %s", command)
+	}
+
 	err = session.Run(command)
 	if err != nil {
-		utils.LogError("SSH command failed: %v, stdout: %s, stderr: %s", err, stdoutBuf.String(), stderrBuf.String())
+		if !isSilent {
+			utils.LogError("SSH command failed: %v, stdout: %s, stderr: %s", err, stdoutBuf.String(), stderrBuf.String())
+		}
 		return stdoutBuf.String(), stderrBuf.String(), fmt.Errorf("SSH command failed: %w", err)
 	}
-	utils.LogInfo("SSH command executed successfully. Stdout: %s, Stderr: %s", stdoutBuf.String(), stderrBuf.String())
+
+	if !isSilent {
+		utils.LogInfo("SSH command executed successfully. Stdout: %s, Stderr: %s", stdoutBuf.String(), stderrBuf.String())
+	}
 	return stdoutBuf.String(), stderrBuf.String(), nil
 }
 

@@ -3054,5 +3054,2273 @@
   {
     "action": "Plugins listed for site 'qqq'.",
     "timestamp": "2025-09-08T21:30:22+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'bbb': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:08+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'bbb': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:15+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'bbb': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:25+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'bbb': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:30+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'qqq': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:32+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'qqq': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:38+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'qqq': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:45+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'qqq': Remote command failed.",
+    "timestamp": "2025-09-12T18:03:51+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'qqq': Remote command failed.",
+    "timestamp": "2025-09-12T18:04:12+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'qqq': Remote command failed.",
+    "timestamp": "2025-09-12T18:04:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:17:59+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:18:16+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'qqq'.",
+    "timestamp": "2025-09-12T18:18:28+01:00"
+  },
+  {
+    "action": "Backup failed for site 'qqq': failed to create backup directory: SSH command failed: Process exited with status 1",
+    "timestamp": "2025-09-12T18:18:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:18:30+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:18:46+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:19:00+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:20:18+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:20:28+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'qqq'.",
+    "timestamp": "2025-09-12T18:20:37+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:20:38+01:00"
+  },
+  {
+    "action": "Failed to dump database for site 'qqq'.",
+    "timestamp": "2025-09-12T18:20:39+01:00"
+  },
+  {
+    "action": "Backup failed for site 'qqq': failed to dump database: SSH command failed: Process exited with status 2",
+    "timestamp": "2025-09-12T18:20:39+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:20:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:21:10+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:21:24+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:21:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:21:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:22:09+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:22:23+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:22:47+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'qqq'.",
+    "timestamp": "2025-09-12T18:22:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:22:55+01:00"
+  },
+  {
+    "action": "Failed to dump database for site 'qqq'.",
+    "timestamp": "2025-09-12T18:22:55+01:00"
+  },
+  {
+    "action": "Backup failed for site 'qqq': failed to dump database: SSH command failed: Process exited with status 2",
+    "timestamp": "2025-09-12T18:22:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:23:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:23:20+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:23:35+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:23:50+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:24:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:24:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:24:33+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'qqq'.",
+    "timestamp": "2025-09-12T18:24:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:24:42+01:00"
+  },
+  {
+    "action": "Failed to dump database for site 'qqq'.",
+    "timestamp": "2025-09-12T18:24:43+01:00"
+  },
+  {
+    "action": "Backup failed for site 'qqq': failed to dump database: SSH command failed: Process exited with status 2",
+    "timestamp": "2025-09-12T18:24:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:24:58+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:25:11+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:25:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:26:01+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:26:12+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:26:28+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:26:39+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:26:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:27:08+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:27:22+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:27:38+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:27:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:28:08+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:28:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:28:33+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:28:51+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:29:07+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:29:22+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:29:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:29:45+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'qqq'.",
+    "timestamp": "2025-09-12T18:29:58+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'qqq': Remote command failed.",
+    "timestamp": "2025-09-12T18:57:35+01:00"
+  },
+  {
+    "action": "Site 'jjj' creation initiated.",
+    "timestamp": "2025-09-12T19:08:55+01:00"
+  },
+  {
+    "action": "Site 'jjj' creation failed: WordPress container did not become ready: container jjj_wordpress did not become healthy in time",
+    "timestamp": "2025-09-12T19:14:51+01:00"
+  },
+  {
+    "action": "Site 'kkk' creation initiated.",
+    "timestamp": "2025-09-12T19:18:09+01:00"
+  },
+  {
+    "action": "Plugin 'elementor' installed successfully on site 'kkk'.",
+    "timestamp": "2025-09-12T19:19:27+01:00"
+  },
+  {
+    "action": "Site 'kkk' created successfully! URL: http://192.168.122.227:8101",
+    "timestamp": "2025-09-12T19:19:27+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:25+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:31+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:36+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:36+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:41+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:46+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:47+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:52+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:56+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:20:57+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:22:03+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:22:09+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:22:13+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:22:15+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:22:23+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-12T19:22:30+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:25:45+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:25:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:11+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:13+01:00"
+  },
+  {
+    "action": "Failed to archive files for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:14+01:00"
+  },
+  {
+    "action": "Backup failed for site 'kkk': failed to archive files: SSH command failed: Process exited with status 2",
+    "timestamp": "2025-09-12T19:26:14+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:16+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:47+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:26:59+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:27:12+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:27:25+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:27:37+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:27:50+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:28:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:28:15+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:28:28+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:28:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:28:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:29:05+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:29:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:29:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:29:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:30:05+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:30:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:30:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:30:44+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:30:56+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:31:09+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:31:21+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:31:34+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:31:48+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:32:00+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:32:30+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:32:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:32:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:33:05+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:33:17+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'kkk'.",
+    "timestamp": "2025-09-12T19:33:25+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:33:26+01:00"
+  },
+  {
+    "action": "Failed to archive files for site 'kkk'.",
+    "timestamp": "2025-09-12T19:33:26+01:00"
+  },
+  {
+    "action": "Backup failed for site 'kkk': failed to archive files: SSH command failed: Process exited with status 2",
+    "timestamp": "2025-09-12T19:33:26+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:33:38+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:33:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:34:08+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:34:24+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:34:37+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:34:49+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:35:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:35:14+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:35:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:35:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:35:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:36:05+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:36:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:36:30+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:36:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:36:56+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:37:08+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:37:20+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:37:33+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:37:46+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:37:58+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:38:11+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:38:23+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:38:40+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'kkk'.",
+    "timestamp": "2025-09-12T19:38:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:38:51+01:00"
+  },
+  {
+    "action": "Backup created successfully for site 'kkk'.",
+    "timestamp": "2025-09-12T19:38:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:39:03+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:39:16+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:39:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:39:41+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:39:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:39:58+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:40:05+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:40:13+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:40:18+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:40:30+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:40:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:40:48+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:40:57+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:47+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:49+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:41:59+01:00"
+  },
+  {
+    "action": "Backup created successfully for site 'kkk'.",
+    "timestamp": "2025-09-12T19:42:01+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:42:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:42:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:42:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:42:41+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:42:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:43:06+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:43:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:43:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:43:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:43:56+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:44:09+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:44:21+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:44:33+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:44:46+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:44:58+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:45:11+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:45:23+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:45:35+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:45:48+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:46:01+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:46:14+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-12T19:46:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:17:21+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:17:34+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:17:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:19:05+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:19:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:19:26+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:19:32+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:24:57+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:37:18+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:37:28+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:37:41+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:37:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:38:06+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:38:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:38:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:38:57+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:39:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:39:20+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'kkk' from backup 'backup-2025-09-12-19-38-40.tar.gz'.",
+    "timestamp": "2025-09-13T10:39:24+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:39:30+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:39:40+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:39:46+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:39:52+01:00"
+  },
+  {
+    "action": "Restore failed for site 'kkk': failed to restore database: SSH command failed: Process exited with status 125, stderr: docker: Error response from daemon: failed to set up container networking: network kkk_default not found\n\nRun 'docker run --help' for more information\n",
+    "timestamp": "2025-09-13T10:39:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:39:59+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:40:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:42:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:42:50+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:43:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:43:15+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:43:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:43:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:43:45+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:43:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:44:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:44:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:44:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:44:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:44:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:45:07+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:45:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:45:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:45:44+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:45:56+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:46:09+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:46:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:46:34+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:46:44+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'kkk' from backup 'backup-2025-09-12-19-38-40.tar.gz'.",
+    "timestamp": "2025-09-13T10:46:55+01:00"
+  },
+  {
+    "action": "Restore failed for site 'kkk': failed to restore database: SSH command failed: Process exited with status 125, stderr: docker: Error response from daemon: failed to set up container networking: network kkk_default not found\n\nRun 'docker run --help' for more information\n",
+    "timestamp": "2025-09-13T10:47:24+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:49:14+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:49:19+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'kkk' from backup 'backup-2025-09-12-19-41-49.tar.gz'.",
+    "timestamp": "2025-09-13T10:49:25+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:49:37+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:49:48+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:49:51+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:49:57+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:50:02+01:00"
+  },
+  {
+    "action": "Restore failed for site 'kkk': failed to restore database: SSH command failed: Process exited with status 125, stderr: docker: Error response from daemon: failed to set up container networking: network kkk_default not found\n\nRun 'docker run --help' for more information\n",
+    "timestamp": "2025-09-13T10:50:03+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:50:05+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:50:14+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:50:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:53:50+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:53:56+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:54:06+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:54:15+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'kkk' from backup 'backup-2025-09-12-19-41-49.tar.gz'.",
+    "timestamp": "2025-09-13T10:54:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'kkk'.",
+    "timestamp": "2025-09-13T10:54:22+01:00"
+  },
+  {
+    "action": "Restore failed for site 'kkk': failed to start db service: SSH command failed: Process exited with status 1",
+    "timestamp": "2025-09-13T10:54:34+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:56:01+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:56:05+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:56:07+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:56:11+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:56:22+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:56:36+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:56:57+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:57:13+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:58:03+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:58:23+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:58:34+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:58:38+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:58:53+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:58:59+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'kkk': Remote command failed.",
+    "timestamp": "2025-09-13T10:59:09+01:00"
+  },
+  {
+    "action": "Site 'mmm' creation initiated.",
+    "timestamp": "2025-09-13T10:59:36+01:00"
+  },
+  {
+    "action": "Plugin 'woocommerce' installed successfully on site 'mmm'.",
+    "timestamp": "2025-09-13T11:01:06+01:00"
+  },
+  {
+    "action": "Plugin 'elementor' installed successfully on site 'mmm'.",
+    "timestamp": "2025-09-13T11:01:20+01:00"
+  },
+  {
+    "action": "Site 'mmm' created successfully! URL: http://192.168.122.227:8102",
+    "timestamp": "2025-09-13T11:01:20+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:01:34+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:02:10+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:03:15+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:03:22+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:03:32+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'mmm'.",
+    "timestamp": "2025-09-13T11:03:37+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:03:43+01:00"
+  },
+  {
+    "action": "Backup created successfully for site 'mmm'.",
+    "timestamp": "2025-09-13T11:03:56+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:03:56+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:04:06+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:04:21+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:04:34+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:04:48+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:05:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:05:16+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:05:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:05:39+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:05:47+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:05:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:06:06+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:06:20+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:07:48+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:08:19+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'mmm' from backup 'backup-2025-09-13-11-03-37.tar.gz'.",
+    "timestamp": "2025-09-13T11:08:24+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:08:26+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'mmm'.",
+    "timestamp": "2025-09-13T11:08:33+01:00"
+  },
+  {
+    "action": "Restore failed for site 'mmm': failed to restore database: SSH command failed: Process exited with status 2, stderr: bash: -c: line 1: syntax error near unexpected token `('\nbash: -c: line 1: `cat /var/www/mmm/restore_temp/mmm_db_backup_2025-09-13-11-03-37.sql | docker compose exec -T -e MYSQL_PWD='7fkrCAIygwYxeVNK' mmm_db_db mariadb -u root %!s(MISSING)'\n",
+    "timestamp": "2025-09-13T11:08:39+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:08:44+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:08:54+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:09:05+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:01+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:12+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:20+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:28+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:31+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:35+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:41+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:52+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:10:56+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'mmm': Remote command failed.",
+    "timestamp": "2025-09-13T11:11:10+01:00"
+  },
+  {
+    "action": "Site 'ccc' creation initiated.",
+    "timestamp": "2025-09-13T11:35:02+01:00"
+  },
+  {
+    "action": "Plugin 'woocommerce' installed successfully on site 'ccc'.",
+    "timestamp": "2025-09-13T11:36:32+01:00"
+  },
+  {
+    "action": "Plugin 'elementor' installed successfully on site 'ccc'.",
+    "timestamp": "2025-09-13T11:36:47+01:00"
+  },
+  {
+    "action": "Site 'ccc' created successfully! URL: http://192.168.122.227:8103",
+    "timestamp": "2025-09-13T11:36:47+01:00"
+  },
+  {
+    "action": "Site 'iii' creation initiated.",
+    "timestamp": "2025-09-13T11:38:22+01:00"
+  },
+  {
+    "action": "Site 'iii' creation failed: failed to run docker compose up: SSH command failed: Process exited with status 1, stdout: , stderr:  Network iii_default  Creating\n Network iii_default  Created\n Volume \"iii_iii_db_data\"  Creating\n Volume \"iii_iii_db_data\"  Created\n Volume \"iii_iii_wordpress_data\"  Creating\n Volume \"iii_iii_wordpress_data\"  Created\n Container iii_db  Creating\n Container iii_db  Created\n Container iii_wordpress  Creating\n Container iii_wordpress  Created\n Container iii_cli  Creating\n Container iii_cli  Created\n Container iii_db  Starting\n Container iii_db  Started\n Container iii_db  Waiting\n Container iii_db  Healthy\n Container iii_wordpress  Starting\nError response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint iii_wordpress (3eb36b5b987c7df5650e72ce7d2b120c1a67ec2344282a412249c9e69917090a): Bind for 0.0.0.0:8103 failed: port is already allocated\n",
+    "timestamp": "2025-09-13T11:38:56+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:06+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:13+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:19+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:30+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:31+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:38+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:42+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:51+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:45:57+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:46:08+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:46:11+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:46:22+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:46:24+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:52:01+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:52:06+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:52:22+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:53:03+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:53:04+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:53:15+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'iii': Remote command failed.",
+    "timestamp": "2025-09-13T11:53:44+01:00"
+  },
+  {
+    "action": "Site 'aaa' creation initiated.",
+    "timestamp": "2025-09-13T11:57:42+01:00"
+  },
+  {
+    "action": "Plugin 'woocommerce' installed successfully on site 'aaa'.",
+    "timestamp": "2025-09-13T11:59:12+01:00"
+  },
+  {
+    "action": "Plugin 'contact-form-7' installed successfully on site 'aaa'.",
+    "timestamp": "2025-09-13T11:59:20+01:00"
+  },
+  {
+    "action": "Plugin 'elementor' installed successfully on site 'aaa'.",
+    "timestamp": "2025-09-13T11:59:34+01:00"
+  },
+  {
+    "action": "Plugin 'jetpack' installed successfully on site 'aaa'.",
+    "timestamp": "2025-09-13T11:59:55+01:00"
+  },
+  {
+    "action": "Site 'aaa' created successfully! URL: http://192.168.122.227:8628",
+    "timestamp": "2025-09-13T11:59:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:00:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:00:13+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'aaa'.",
+    "timestamp": "2025-09-13T12:01:21+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:01:25+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:01:39+01:00"
+  },
+  {
+    "action": "Backup created successfully for site 'aaa'.",
+    "timestamp": "2025-09-13T12:01:49+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:01:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:02:01+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:02:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:02:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:02:45+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:02:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:03:13+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:03:21+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'aaa' from backup 'backup-2025-09-13-12-01-21.tar.gz'.",
+    "timestamp": "2025-09-13T12:03:30+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'aaa'.",
+    "timestamp": "2025-09-13T12:03:30+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:03:42+01:00"
+  },
+  {
+    "action": "Restore failed for site 'aaa': failed to restore database: SSH command failed: Process exited with status 1, stderr: no configuration file provided: not found\n",
+    "timestamp": "2025-09-13T12:03:45+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:03:48+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:03:58+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:04:44+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:04:47+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:04:58+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:06:35+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:08:30+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:14:55+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'aaa': Remote command failed.",
+    "timestamp": "2025-09-13T12:15:00+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'aaa': Site not found.",
+    "timestamp": "2025-09-13T12:15:08+01:00"
+  },
+  {
+    "action": "Site 'omg' creation initiated.",
+    "timestamp": "2025-09-13T12:15:31+01:00"
+  },
+  {
+    "action": "Plugin 'wordpress-seo' installed successfully on site 'omg'.",
+    "timestamp": "2025-09-13T12:16:53+01:00"
+  },
+  {
+    "action": "Plugin 'woocommerce' installed successfully on site 'omg'.",
+    "timestamp": "2025-09-13T12:17:19+01:00"
+  },
+  {
+    "action": "Plugin 'wp-super-cache' installed successfully on site 'omg'.",
+    "timestamp": "2025-09-13T12:17:29+01:00"
+  },
+  {
+    "action": "Plugin 'akismet' installed successfully on site 'omg'.",
+    "timestamp": "2025-09-13T12:17:33+01:00"
+  },
+  {
+    "action": "Plugin 'updraftplus' installed successfully on site 'omg'.",
+    "timestamp": "2025-09-13T12:17:43+01:00"
+  },
+  {
+    "action": "Plugin 'elementor' installed successfully on site 'omg'.",
+    "timestamp": "2025-09-13T12:17:58+01:00"
+  },
+  {
+    "action": "Site 'omg' created successfully! URL: http://192.168.122.227:8299",
+    "timestamp": "2025-09-13T12:17:58+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'omg'.",
+    "timestamp": "2025-09-13T12:19:26+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:19:28+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:19:38+01:00"
+  },
+  {
+    "action": "Backup created successfully for site 'omg'.",
+    "timestamp": "2025-09-13T12:19:51+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:19:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:20:06+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:20:20+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:20:32+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:20:46+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:21:00+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:21:15+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:21:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:21:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:21:57+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:22:11+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:22:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:22:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:22:49+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:23:16+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:24:32+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'omg' from backup 'backup-2025-09-13-12-19-26.tar.gz'.",
+    "timestamp": "2025-09-13T12:24:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:24:41+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:24:52+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:24:56+01:00"
+  },
+  {
+    "action": "Restore failed for site 'omg': failed to restore database: SSH command failed: Process exited with status 1, stderr: ERROR 2002 (HY000): Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)\n",
+    "timestamp": "2025-09-13T12:24:56+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:01+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:03+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:22+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:23+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:40+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:49+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:50+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:25:52+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:29:25+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:29:31+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:29:39+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'omg' from backup 'backup-2025-09-13-12-19-26.tar.gz'.",
+    "timestamp": "2025-09-13T12:29:44+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:29:45+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:29:51+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:29:51+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-13T12:30:06+01:00"
+  },
+  {
+    "action": "Site 'omg' restored successfully from backup 'backup-2025-09-13-12-19-26.tar.gz'.",
+    "timestamp": "2025-09-13T12:30:20+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:30:23+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:30:32+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:30:44+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:30:57+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:31:09+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:31:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:31:33+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:31:39+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:31:46+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:33:18+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:33:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:33:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:33:57+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:34:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:34:13+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:34:25+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:34:37+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:34:50+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:35:02+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:35:14+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:35:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:35:39+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:35:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:36:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:36:16+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:36:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:36:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:36:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:37:07+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:37:19+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:37:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:37:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:37:55+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:38:08+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:38:20+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:38:33+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:38:45+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:38:57+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:39:09+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:39:22+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:39:34+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:39:47+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:39:59+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:40:11+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:40:23+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:40:36+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:40:48+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:41:00+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:41:12+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:41:24+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:41:37+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:41:50+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-13T12:41:58+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-14T10:22:23+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'omg'.",
+    "timestamp": "2025-09-14T10:22:41+01:00"
+  },
+  {
+    "action": "Site 'omg' creation failed and resources cleaned up.",
+    "timestamp": "2025-09-14T10:22:49+01:00"
+  },
+  {
+    "action": "Site 'omg' deleted successfully!",
+    "timestamp": "2025-09-14T10:22:49+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'omg': Remote command failed.",
+    "timestamp": "2025-09-14T10:22:49+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:22:57+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:22:59+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:23:08+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:23:22+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:23:25+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:23:28+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:24:14+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:24:25+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:24:27+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:24:32+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:24:45+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:24:56+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:25:06+01:00"
+  },
+  {
+    "action": "Site 'yyy' creation initiated.",
+    "timestamp": "2025-09-14T10:25:18+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:25:23+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:25:31+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:25:33+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:25:54+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:26:26+01:00"
+  },
+  {
+    "action": "Plugin 'elementor' installed successfully on site 'yyy'.",
+    "timestamp": "2025-09-14T10:26:27+01:00"
+  },
+  {
+    "action": "Failed to get plugins for site 'omg': Site not found.",
+    "timestamp": "2025-09-14T10:26:41+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:26:46+01:00"
+  },
+  {
+    "action": "Plugin 'woocommerce' installed successfully on site 'yyy'.",
+    "timestamp": "2025-09-14T10:26:52+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:26:58+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:27:12+01:00"
+  },
+  {
+    "action": "Plugin 'wordpress-seo' installed successfully on site 'yyy'.",
+    "timestamp": "2025-09-14T10:27:14+01:00"
+  },
+  {
+    "action": "Plugin 'contact-form-7' installed successfully on site 'yyy'.",
+    "timestamp": "2025-09-14T10:27:22+01:00"
+  },
+  {
+    "action": "Site 'yyy' created successfully! URL: http://192.168.122.227:8646",
+    "timestamp": "2025-09-14T10:27:22+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:27:26+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:27:40+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:27:54+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:28:08+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:28:22+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:28:36+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:28:50+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:29:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:29:17+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:29:31+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:29:45+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:29:59+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:30:13+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:30:27+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:30:39+01:00"
+  },
+  {
+    "action": "Backup initiated for site 'yyy'.",
+    "timestamp": "2025-09-14T10:30:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:30:49+01:00"
+  },
+  {
+    "action": "Backup created successfully for site 'yyy'.",
+    "timestamp": "2025-09-14T10:31:03+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:31:04+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:31:18+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:31:28+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:31:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:31:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:33:29+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:33:43+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:33:53+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:34:06+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:34:13+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:34:28+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:34:35+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:34:42+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:34:49+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:34:55+01:00"
+  },
+  {
+    "action": "Restore initiated for site 'yyy' from backup 'backup-2025-09-14-10-30-43.tar.gz'.",
+    "timestamp": "2025-09-14T10:34:55+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'yyy': Remote command failed.",
+    "timestamp": "2025-09-14T10:35:07+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'yyy': Remote command failed.",
+    "timestamp": "2025-09-14T10:35:12+01:00"
+  },
+  {
+    "action": "Failed to list plugins for site 'yyy': Remote command failed.",
+    "timestamp": "2025-09-14T10:35:34+01:00"
+  },
+  {
+    "action": "Site 'yyy' restored successfully from backup 'backup-2025-09-14-10-30-43.tar.gz'.",
+    "timestamp": "2025-09-14T10:35:45+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:36:16+01:00"
+  },
+  {
+    "action": "Plugins listed for site 'yyy'.",
+    "timestamp": "2025-09-14T10:36:22+01:00"
   }
 ]

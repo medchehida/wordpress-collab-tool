@@ -107,6 +107,8 @@ export default function VPSSiteWeaver() {
   const [isCreating, setIsCreating] = useState(false)
   const [isDeletingSite, setIsDeletingSite] = useState(false)
   const [isRestartingSite, setIsRestartingSite] = useState(false)
+  const [isCreatingBackup, setIsCreatingBackup] = useState(false)
+  const [isRestoringBackup, setIsRestoringBackup] = useState(false)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [showPassword, setShowPassword] = useState<{ [key: string]: boolean }>({})
@@ -142,6 +144,14 @@ export default function VPSSiteWeaver() {
     ([url, token]) => fetcher(url, token),
     {
       refreshInterval: 10000, // Poll every 10 seconds
+    },
+  )
+
+  const { data: backups = [], error: backupsError } = useSWR<string[]>(
+    token && selectedSite ? [`${API_BASE_URL}/sites/${selectedSite.projectName}/backups`, token] : null,
+    ([url, token]) => fetcher(url, token),
+    {
+      refreshInterval: 5000, // Poll every 5 seconds
     },
   )
 
@@ -369,6 +379,80 @@ export default function VPSSiteWeaver() {
       setIsRestartingSite(false)
     }
   }
+
+  const handleCreateBackup = async () => {
+    if (!selectedSite) return
+    setIsCreatingBackup(true)
+    try {
+      const response = await fetch(`${API_BASE_URL}/sites/${selectedSite.projectName}/backups`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.details || `HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      toast({
+        title: "Backup Started",
+        description: data.message,
+      })
+      mutate([`${API_BASE_URL}/sites/${selectedSite.projectName}/backups`, token]) // Revalidate backups
+    } catch (error: any) {
+      console.error("Error creating backup:", error)
+      toast({
+        title: "Error",
+        description: `Failed to start backup: ${error.message || error}`,
+        variant: "destructive",
+      })
+    } finally {
+      setIsCreatingBackup(false)
+    }
+  }
+
+  const handleRestoreBackup = async (backupFile: string) => {
+    if (!selectedSite) return;
+    if (!window.confirm(`Are you sure you want to restore this backup? This will overwrite the current site.`)) {
+      return;
+    }
+
+    setIsRestoringBackup(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/sites/${selectedSite.projectName}/backups/restore`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ backupFile }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.details || `HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      toast({
+        title: "Backup Restore Started",
+        description: data.message,
+      });
+      mutate([`${API_BASE_URL}/activities`, token]); // Revalidate activities
+    } catch (error: any) {
+      console.error("Error restoring backup:", error);
+      toast({
+        title: "Error",
+        description: `Failed to start restore: ${error.message || error}`,
+        variant: "destructive",
+      });
+    } finally {
+      setIsRestoringBackup(false);
+    }
+  };
 
   const handleLogin = async () => {
     setIsLoggingIn(true)
@@ -773,7 +857,7 @@ export default function VPSSiteWeaver() {
               </div>
             ) : (
               <div className="text-3xl font-semibold text-slate-800">
-                {Array.from(new Set(sites.flatMap((site) => site.plugins || []))).length}
+                {Array.from(new Set((sites || []).flatMap((site) => site.plugins || []))).length}
               </div>
             )}
             <p className="text-sm text-slate-500 mt-1">Across all sites</p>
@@ -1022,7 +1106,7 @@ export default function VPSSiteWeaver() {
                 </TableCell>
               </TableRow>
             ) : (
-              sites.map((site) => (
+              (sites || []).map((site) => (
                 <TableRow key={site.projectName} className="hover:bg-slate-50">
                   <TableCell className="py-3">{getStatusBadge(site.status)}</TableCell>
                   <TableCell className="py-3">
@@ -1297,6 +1381,50 @@ export default function VPSSiteWeaver() {
                           checked={plugin.status === "active"}
                           onCheckedChange={() => handlePluginToggle(plugin.name, plugin.status === "active")}
                         />
+                      </div>
+                    ))
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-sm">
+              <CardHeader className="flex flex-row items-center justify-between pb-4">
+                <CardTitle className="text-lg font-medium text-slate-800">Backups</CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCreateBackup}
+                  disabled={isCreatingBackup}
+                >
+                  {isCreatingBackup && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Create New Backup
+                </Button>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {!backups && !backupsError ? (
+                    <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
+                  ) : backupsError ? (
+                    <p className="text-red-500 text-sm">Failed to load backups.</p>
+                  ) : backups.length === 0 ? (
+                    <p className="text-slate-500 text-sm">No backups found for this site.</p>
+                  ) : (
+                    backups.map((backup, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0"
+                      >
+                        <span className="text-slate-700 font-mono text-sm">{backup}</span>
+                        <div>
+                          <Button variant="outline" size="sm" onClick={() => handleRestoreBackup(backup)} disabled={isRestoringBackup}>
+                            {isRestoringBackup && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                            Restore
+                          </Button>
+                          <Button variant="ghost" size="icon" className="ml-2 text-red-600 hover:text-red-700">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </div>
                     ))
                   )}

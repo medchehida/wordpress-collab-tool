@@ -19,6 +19,9 @@ func SetupRoutes(router *gin.Engine) {
 		auth.GET("/sites/:projectName", controllers.GetWordPressSite)
 		auth.DELETE("/sites/:projectName", controllers.DeleteWordPressSite)
 		auth.POST("/sites/:projectName/restart", controllers.RestartWordPressSite)
+		auth.POST("/sites/:projectName/backups", controllers.CreateBackup)
+		auth.GET("/sites/:projectName/backups", controllers.ListBackups)
+		auth.POST("/sites/:projectName/backups/restore", controllers.RestoreBackup)
 		auth.GET("/sites/:projectName/plugins", controllers.GetSitePlugins)
 		auth.POST("/sites/:projectName/plugins/:pluginName", controllers.InstallPlugin)
 		auth.DELETE(" /sites/:projectName/plugins/:pluginName", controllers.DeletePlugin)
@@ -26,5 +29,6 @@ func SetupRoutes(router *gin.Engine) {
 		auth.POST("/sites/:projectName/plugins/:pluginName/deactivate", controllers.DeactivatePlugin)
 		auth.GET("/vps/stats", controllers.GetVPSStats)
 		auth.GET("/activities", controllers.GetActivities)
+		
 	}
 }
