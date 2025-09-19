@@ -65,6 +65,19 @@ This project is a web-based tool for managing WordPress instances on a Virtual P
 - [x] **Step 6: Display the List of Backups.**
 
 ### Phase 3: Restore Functionality
-- [ ] **Step 7: Implement the Core Restore Logic in Go.**
-- [ ] **Step 8: Create the `POST` API Endpoint for Restoring.**
-- [ ] **Step 9: Connect the "Restore" Button to the API.**
+- [x] **Step 7: Implement the Core Restore Logic in Go.**
+- [x] **Step 8: Create the `POST` API Endpoint for Restoring.**
+- [x] **Step 9: Connect the "Restore" Button to the API.**
+
+### Phase 4: UI/UX Enhancements
+
+- [ ] **Step 10: Implement Loading State for Site Creation.**
+    -   Disable the "Create Site" button while a site is being created.
+    -   Show a loading indicator (e.g., a spinner) on the site card or globally.
+    -   Update the site status in real-time if possible, or refresh the list upon completion.
+- [ ] **Step 11: Implement Loading State for Backup/Restore.**
+    -   Disable the "Create Backup" and "Restore" buttons during operation.
+    -   Show a loading indicator on the backups card.
+- [ ] **Step 12: Implement Toast Notifications for Operations.**
+    -   Show a success toast notification when an operation (create, delete, backup, restore) completes successfully.
+    -   Show an error toast notification with a descriptive message if an operation fails.

@@ -46,6 +46,8 @@ type Claims struct {
 
 // Activity represents a log entry for an action.
 type Activity struct {
-	Action    string `json:"action"`
-	Timestamp string `json:"timestamp"`
+	Message     string `json:"message"`
+	Timestamp   string `json:"timestamp"`
+	Level       string `json:"level"` // e.g., "info", "error"
+	ProjectName string `json:"projectName,omitempty"`
 }

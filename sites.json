@@ -15,5 +15,19 @@
     "adminUsername": "admin",
     "adminPassword": "password",
     "lastChecked": "2025-09-14T10:27:22+01:00"
+  },
+  {
+    "projectName": "ooo",
+    "wpPort": 8759,
+    "dbName": "ooo_db",
+    "dbPassword": "2YuG$OUMDA2J%1zF",
+    "siteURL": "http://192.168.122.227:8759",
+    "plugins": [
+      "woocommerce"
+    ],
+    "status": "active",
+    "adminUsername": "admin",
+    "adminPassword": "adminadmin",
+    "lastChecked": "2025-09-15T17:55:21+01:00"
   }
 ]

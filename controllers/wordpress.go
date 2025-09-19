@@ -148,19 +148,19 @@ func CreateWordPressSite(c *gin.Context) {
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Site '%s' creation initiated.", projectName))
+	services.LogActivity("info", fmt.Sprintf("Site '%s' creation initiated.", projectName), projectName)
 
 	go func() {
 		err := services.DeployWordPressSite(newSite, newSite.Plugins, newSite.AdminUsername, newSite.AdminPassword)
 		if err != nil {
 			utils.LogError("Failed to deploy WordPress site '%s': %v", newSite.ProjectName, err)
 			services.UpdateSiteStatus(newSite.ProjectName, "failed")
-			services.LogActivity(fmt.Sprintf("Site '%s' creation failed: %v", newSite.ProjectName, err))
+			services.LogActivity("error", fmt.Sprintf("Site '%s' creation failed: %v", newSite.ProjectName, err), newSite.ProjectName)
 			// TODO: Implement cleanup if deployment fails
 			return
 		}
 		services.UpdateSiteStatus(newSite.ProjectName, "active")
-		services.LogActivity(fmt.Sprintf("Site '%s' created successfully! URL: %s", newSite.ProjectName, newSite.SiteURL))
+		services.LogActivity("info", fmt.Sprintf("Site '%s' created successfully!", newSite.ProjectName), newSite.ProjectName)
 	}()
 
 	c.JSON(http.StatusOK, gin.H{"message": "WordPress deployment initiated successfully!", "url": newSite.SiteURL})
@@ -170,19 +170,22 @@ func CreateWordPressSite(c *gin.Context) {
 func GetWordPressSites(c *gin.Context) {
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity("Failed to retrieve sites: Error reading sites file.")
+		services.LogActivity("error", "Failed to retrieve sites: Error reading sites file.", "")
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
 
 	var wg sync.WaitGroup
 	for i := range sites {
-		wg.Add(1)
-		go func(i int) {
-			defer wg.Done()
-			status := services.GetSiteStatus(sites[i]) // Use service function
-			sites[i].Status = status
-		}(i)
+		// Only check live status if the site is not already in a 'creating' or 'failed' state
+		if sites[i].Status != "creating" && sites[i].Status != "failed" {
+			wg.Add(1)
+			go func(i int) {
+				defer wg.Done()
+				status := services.GetSiteStatus(sites[i]) // Use service function
+				sites[i].Status = status
+			}(i)
+		}
 	}
 	wg.Wait()
 
@@ -204,7 +207,7 @@ func GetWordPressSite(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to retrieve site '%s': Error reading sites file.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to retrieve site '%s': Error reading sites file.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -220,7 +223,7 @@ func GetWordPressSite(c *gin.Context) {
 	}
 
 	if foundSite == nil {
-		services.LogActivity(fmt.Sprintf("Failed to retrieve site '%s': Site not found.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to retrieve site '%s': Site not found.", projectName), projectName)
 		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 		return
 	}
@@ -243,7 +246,7 @@ func DeleteWordPressSite(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to delete site '%s': Error reading sites file.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to delete site '%s': Error reading sites file.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -269,7 +272,7 @@ func DeleteWordPressSite(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to delete site '%s': Failed to connect to VPS.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to delete site '%s': Failed to connect to VPS.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -279,12 +282,12 @@ func DeleteWordPressSite(c *gin.Context) {
 
 	if err := services.WriteSites(updatedSites); err != nil {
 		utils.LogError("Failed to write sites: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to delete site '%s': Failed to update site information.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to delete site '%s': Failed to update site information.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete site information."})
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Site '%s' deleted successfully!", projectName))
+	services.LogActivity("info", fmt.Sprintf("Site '%s' deleted successfully!", projectName), projectName)
 	c.JSON(http.StatusOK, gin.H{"message": "Site deleted successfully!"})
 }
 
@@ -298,7 +301,7 @@ func RestartWordPressSite(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to restart site '%s': Error reading sites file.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to restart site '%s': Error reading sites file.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -312,7 +315,7 @@ func RestartWordPressSite(c *gin.Context) {
 	}
 
 	if !found {
-		services.LogActivity(fmt.Sprintf("Failed to restart site '%s': Site not found.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to restart site '%s': Site not found.", projectName), projectName)
 		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 		return
 	}
@@ -321,7 +324,7 @@ func RestartWordPressSite(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to restart site '%s': Failed to connect to VPS.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to restart site '%s': Failed to connect to VPS.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -331,12 +334,12 @@ func RestartWordPressSite(c *gin.Context) {
 	_, _, err = services.RunSSHCommand(client, fmt.Sprintf("cd %s && docker-compose restart", remotePath))
 	if err != nil {
 		utils.LogError("SSH command failed: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to restart site '%s': Remote command failed.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to restart site '%s': Remote command failed.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to restart remote site."})
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Site '%s' restarted successfully!", projectName))
+	services.LogActivity("info", fmt.Sprintf("Site '%s' restarted successfully!", projectName), projectName)
 	c.JSON(http.StatusOK, gin.H{"message": "Site restarted successfully!"})
 }
 
@@ -353,7 +356,7 @@ func CreateBackup(c *gin.Context) {
 		if err != nil {
 			utils.LogError("Failed to create backup for site '%s': %v", projectName, err)
 			// Optionally, log this failure as an activity
-			services.LogActivity(fmt.Sprintf("Backup failed for site '%s': %v", projectName, err))
+			services.LogActivity("error", fmt.Sprintf("Backup failed for site '%s': %v", projectName, err), projectName)
 		}
 	}()
 
@@ -405,7 +408,7 @@ func RestoreBackup(c *gin.Context) {
 		err := services.RestoreBackup(projectName, backupFile)
 		if err != nil {
 			utils.LogError("Failed to restore backup for site '%s': %v", projectName, err)
-			services.LogActivity(fmt.Sprintf("Restore failed for site '%s': %v", projectName, err))
+			services.LogActivity("error", fmt.Sprintf("Restore failed for site '%s': %v", projectName, err), projectName)
 		}
 	}()
 
@@ -422,7 +425,7 @@ func GetSitePlugins(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to get plugins for site '%s': Error reading sites file.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to get plugins for site '%s': Error reading sites file.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -436,7 +439,7 @@ func GetSitePlugins(c *gin.Context) {
 	}
 
 	if !found {
-		services.LogActivity(fmt.Sprintf("Failed to get plugins for site '%s': Site not found.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to get plugins for site '%s': Site not found.", projectName), projectName)
 		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 		return
 	}
@@ -445,7 +448,7 @@ func GetSitePlugins(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to get plugins for site '%s': Failed to connect to VPS.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to get plugins for site '%s': Failed to connect to VPS.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -455,7 +458,7 @@ func GetSitePlugins(c *gin.Context) {
 	stdout, stderr, err := services.RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin list --format=json", remotePath, remotePath, projectName))
 	if err != nil {
 		utils.LogError("SSH command failed: %v, output: %s", err, stdout+stderr)
-		services.LogActivity(fmt.Sprintf("Failed to list plugins for site '%s': Remote command failed.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to list plugins for site '%s': Remote command failed.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to list plugins."})
 		return
 	}
@@ -463,12 +466,12 @@ func GetSitePlugins(c *gin.Context) {
 	var plugins []map[string]interface{}
 	if err := json.Unmarshal([]byte(stdout), &plugins); err != nil {
 		utils.LogError("Failed to unmarshal plugins: %v. Raw output: %s", err, stdout)
-		services.LogActivity(fmt.Sprintf("Failed to list plugins for site '%s': Failed to parse plugin list.", projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to list plugins for site '%s': Failed to parse plugin list.", projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse plugin list."})
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Plugins listed for site '%s'.", projectName))
+	services.LogActivity("info", fmt.Sprintf("Plugins listed for site '%s'.", projectName), projectName)
 	c.JSON(http.StatusOK, plugins)
 }
 
@@ -484,7 +487,7 @@ func InstallPlugin(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to install plugin '%s' on site '%s': Error reading sites file.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to install plugin '%s' on site '%s': Error reading sites file.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -498,7 +501,7 @@ func InstallPlugin(c *gin.Context) {
 	}
 
 	if !found {
-		services.LogActivity(fmt.Sprintf("Failed to install plugin '%s' on site '%s': Site not found.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to install plugin '%s' on site '%s': Site not found.", pluginName, projectName), projectName)
 		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 		return
 	}
@@ -507,7 +510,7 @@ func InstallPlugin(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to install plugin '%s' on site '%s': Failed to connect to VPS.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to install plugin '%s' on site '%s': Failed to connect to VPS.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -517,12 +520,12 @@ func InstallPlugin(c *gin.Context) {
 	stdout, stderr, err := services.RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin install %s --activate", remotePath, remotePath, projectName, pluginName))
 	if err != nil {
 		utils.LogError("SSH command failed: %v, output: %s", err, stdout+stderr)
-		services.LogActivity(fmt.Sprintf("Failed to install plugin '%s' on site '%s': Remote command failed.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to install plugin '%s' on site '%s': Remote command failed.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to install plugin."})
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Plugin '%s' installed successfully on site '%s'.", pluginName, projectName))
+	services.LogActivity("info", fmt.Sprintf("Plugin '%s' installed successfully on site '%s'.", pluginName, projectName), projectName)
 	c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("Plugin %s installed successfully!", pluginName)})
 }
 
@@ -538,7 +541,7 @@ func ActivatePlugin(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Error reading sites file.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Error reading sites file.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -552,7 +555,7 @@ func ActivatePlugin(c *gin.Context) {
 	}
 
 	if !found {
-		services.LogActivity(fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Site not found.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Site not found.", pluginName, projectName), projectName)
 		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 		return
 	}
@@ -561,7 +564,7 @@ func ActivatePlugin(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Failed to connect to VPS.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Failed to connect to VPS.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -571,12 +574,12 @@ func ActivatePlugin(c *gin.Context) {
 	stdout, stderr, err := services.RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin activate %s", remotePath, remotePath, projectName, pluginName))
 	if err != nil {
 		utils.LogError("SSH command failed: %v, output: %s", err, stdout+stderr)
-		services.LogActivity(fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Remote command failed.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to activate plugin '%s' on site '%s': Remote command failed.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to activate plugin."})
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Plugin '%s' activated successfully on site '%s'.", pluginName, projectName))
+	services.LogActivity("info", fmt.Sprintf("Plugin '%s' activated successfully on site '%s'.", pluginName, projectName), projectName)
 	c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("Plugin %s activated successfully!", pluginName)})
 }
 
@@ -592,7 +595,7 @@ func DeactivatePlugin(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Error reading sites file.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Error reading sites file.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -606,7 +609,7 @@ func DeactivatePlugin(c *gin.Context) {
 	}
 
 	if !found {
-		services.LogActivity(fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Site not found.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Site not found.", pluginName, projectName), projectName)
 		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 		return
 	}
@@ -615,7 +618,7 @@ func DeactivatePlugin(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Failed to connect to VPS.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Failed to connect to VPS.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -625,12 +628,12 @@ func DeactivatePlugin(c *gin.Context) {
 	stdout, stderr, err := services.RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin deactivate %s", remotePath, remotePath, projectName, pluginName))
 	if err != nil {
 		utils.LogError("SSH command failed: %v, output: %s", err, stdout+stderr)
-		services.LogActivity(fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Remote command failed.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to deactivate plugin '%s' on site '%s': Remote command failed.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to deactivate plugin."})
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Plugin '%s' deactivated successfully on site '%s'.", pluginName, projectName))
+	services.LogActivity("info", fmt.Sprintf("Plugin '%s' deactivated successfully on site '%s'.", pluginName, projectName), projectName)
 	c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("Plugin %s deactivated successfully!", pluginName)})
 }
 
@@ -646,7 +649,7 @@ func DeletePlugin(c *gin.Context) {
 
 	sites, err := services.ReadSites()
 	if err != nil {
-		services.LogActivity(fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Error reading sites file.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Error reading sites file.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve sites."})
 		return
 	}
@@ -660,7 +663,7 @@ func DeletePlugin(c *gin.Context) {
 	}
 
 	if !found {
-		services.LogActivity(fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Site not found.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Site not found.", pluginName, projectName), projectName)
 		c.JSON(http.StatusNotFound, gin.H{"error": "Site not found."})
 		return
 	}
@@ -669,7 +672,7 @@ func DeletePlugin(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
-		services.LogActivity(fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Failed to connect to VPS.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Failed to connect to VPS.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -679,12 +682,12 @@ func DeletePlugin(c *gin.Context) {
 	stdout, stderr, err := services.RunSSHCommand(client, fmt.Sprintf("cd %s && docker compose -f %s/docker-compose.yml exec -T %s_cli wp plugin delete %s", remotePath, remotePath, projectName, pluginName))
 	if err != nil {
 		utils.LogError("SSH command failed: %v, output: %s", err, stdout+stderr)
-		services.LogActivity(fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Remote command failed.", pluginName, projectName))
+		services.LogActivity("error", fmt.Sprintf("Failed to delete plugin '%s' from site '%s': Remote command failed.", pluginName, projectName), projectName)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to uninstall plugin."})
 		return
 	}
 
-	services.LogActivity(fmt.Sprintf("Plugin '%s' uninstalled successfully from site '%s'.", pluginName, projectName))
+	services.LogActivity("info", fmt.Sprintf("Plugin '%s' uninstalled successfully from site '%s'.", pluginName, projectName), projectName)
 	c.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("Plugin %s uninstalled successfully!", pluginName)})
 }
 
@@ -694,6 +697,7 @@ func GetVPSStats(c *gin.Context) {
 	client, err := services.GetSSHClient(cfg)
 	if err != nil {
 		utils.LogError("Failed to connect to VPS: %v", err)
+		services.LogActivity("error", fmt.Sprintf("Failed to connect to VPS: %v", err), "")
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to connect to VPS."})
 		return
 	}
@@ -720,7 +724,7 @@ func GetVPSStats(c *gin.Context) {
 	ramUsage := strings.TrimSpace(stdoutRAM)
 
 	// services.LogActivity("VPS stats requested.")
-			c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"cpu_usage": cpuUsage,
 		"ram_usage": ramUsage,
 	})
@@ -737,7 +741,3 @@ func GetActivities(c *gin.Context) {
 
 	c.JSON(http.StatusOK, activities)
 }
-
-
-
-

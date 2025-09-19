@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"text/template"
 	"time"
 
@@ -82,19 +83,23 @@ func WriteSites(sites []models.Site) error {
 	return nil
 }
 
-// LogActivity logs an activity to activities.json.
-func LogActivity(action string) {
-	var activities []models.Activity
-	if _, err := os.Stat(activitiesFilePath); !os.IsNotExist(err) {
-		data, err := ioutil.ReadFile(activitiesFilePath)
-		if err == nil && len(data) > 0 {
-			json.Unmarshal(data, &activities)
-		}
+var activityMux sync.Mutex
+
+// LogActivity logs an activity to activities.json in a thread-safe manner.
+func LogActivity(level, message, projectName string) {
+	activityMux.Lock()
+	defer activityMux.Unlock()
+
+	activities, err := ReadActivities()
+	if err != nil {
+		activities = []models.Activity{}
 	}
 
 	newActivity := models.Activity{
-		Action:    action,
-		Timestamp: time.Now().Format(time.RFC3339),
+		Level:       level,
+		Message:     message,
+		ProjectName: projectName,
+		Timestamp:   time.Now().Format(time.RFC3339),
 	}
 	activities = append(activities, newActivity)
 
@@ -114,7 +119,7 @@ func LogActivity(action string) {
 func ReadActivities() ([]models.Activity, error) {
 	var activities []models.Activity
 	if _, err := os.Stat(activitiesFilePath); os.IsNotExist(err) {
-		return activities, nil // Return empty list if file doesn't exist
+		return []models.Activity{}, nil // Return empty slice if file doesn't exist
 	}
 
 	data, err := ioutil.ReadFile(activitiesFilePath)
@@ -123,13 +128,19 @@ func ReadActivities() ([]models.Activity, error) {
 	}
 
 	if len(data) == 0 {
-		return activities, nil // Return empty list if file is empty
+		return []models.Activity{}, nil // Return empty slice if file is empty
 	}
 
 	err = json.Unmarshal(data, &activities)
 	if err != nil {
 		return nil, fmt.Errorf("failed to unmarshal activities data: %w", err)
 	}
+
+	// Reverse the order of activities to show newest first
+	for i, j := 0, len(activities)-1; i < j; i, j = i+1, j-1 {
+		activities[i], activities[j] = activities[j], activities[i]
+	}
+
 	return activities, nil
 }
 
@@ -165,7 +176,7 @@ func CleanupSite(client *ssh.Client, projectName string, wpPort int) {
 		RunSSHCommand(client, fmt.Sprintf("sudo rm -rf %s", remotePath))
 	}
 	UpdateSiteStatus(projectName, "failed")
-	LogActivity(fmt.Sprintf("Site '%s' creation failed and resources cleaned up.", projectName))
+	LogActivity("error", fmt.Sprintf("Site '%s' creation failed and resources cleaned up.", projectName), projectName)
 }
 
 // DeployWordPressSite handles the full deployment process of a WordPress site.
@@ -238,14 +249,14 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 	time.Sleep(5 * time.Second) // Give docker-compose a moment to start
 
 	// Wait for the WordPress container to be ready
-	utils.LogInfo("Waiting for WordPress container to be ready for site '%s'...", site.ProjectName)
+	utils.LogInfo("Waiting for WordPress container to be ready for site '%s'வுகளை...", site.ProjectName)
 	if err := waitForContainerHealthy(sshClient, site.ProjectName, "_wordpress", remotePath); err != nil {
 		return fmt.Errorf("WordPress container did not become ready: %w", err)
 	}
 	utils.LogInfo("WordPress container for site '%s' is ready.", site.ProjectName)
 
 	// Wait for the CLI container to be ready
-	utils.LogInfo("Waiting for CLI container to be ready for site '%s'...", site.ProjectName)
+	utils.LogInfo("Waiting for CLI container to be ready for site '%s'வுகளை...", site.ProjectName)
 	if err := waitForContainerHealthy(sshClient, site.ProjectName, "_cli", remotePath); err != nil {
 		return fmt.Errorf("CLI container did not become ready: %w", err)
 	}
@@ -274,11 +285,11 @@ func DeployWordPressSite(site models.Site, selectedPlugins []string, adminUserna
 			if err != nil {
 				errMessage := fmt.Sprintf("failed to install plugin '%s' for site '%s'. Error: %v, stdout: %s, stderr: %s", plugin, site.ProjectName, err, stdout, stderr)
 				utils.LogError(errMessage)
-				LogActivity(fmt.Sprintf("Failed to install plugin '%s' on site '%s'.", plugin, site.ProjectName))
+				LogActivity("error", fmt.Sprintf("Failed to install plugin '%s' on site '%s'.", plugin, site.ProjectName), site.ProjectName)
 				installErrors = append(installErrors, errMessage)
 			} else {
 				utils.LogInfo("Plugin '%s' installed successfully on site '%s'.", plugin, site.ProjectName)
-				LogActivity(fmt.Sprintf("Plugin '%s' installed successfully on site '%s'.", plugin, site.ProjectName))
+				LogActivity("info", fmt.Sprintf("Plugin '%s' installed successfully on site '%s'.", plugin, site.ProjectName), site.ProjectName)
 			}
 		}
 
@@ -351,7 +362,7 @@ func CreateBackup(projectName string) error {
 		return fmt.Errorf("site '%s' not found", projectName)
 	}
 
-	LogActivity(fmt.Sprintf("Backup initiated for site '%s'.", projectName))
+	LogActivity("info", fmt.Sprintf("Backup initiated for site '%s'.", projectName), projectName)
 
 	remotePath := fmt.Sprintf("/var/www/%s", projectName)
 	backupDir := fmt.Sprintf("/var/www/backups/%s", projectName)
@@ -360,6 +371,10 @@ func CreateBackup(projectName string) error {
 	filesBackupFile := fmt.Sprintf("%s_files_backup_%s.tar.gz", projectName, timestamp)
 	finalBackupFile := fmt.Sprintf("backup-%s.tar.gz", timestamp)
 
+	// Paths within the backup directory
+	dbBackupPath := filepath.Join(backupDir, dbBackupFile)
+	filesBackupPath := filepath.Join(backupDir, filesBackupFile)
+
 	// 1. Ensure backup directory exists
 	utils.LogInfo("Ensuring backup directory exists: %s", backupDir)
 	_, _, err = RunSSHCommand(sshClient, fmt.Sprintf("sudo install -d -o %s -g %s %s", cfg.SSHUser, cfg.SSHUser, backupDir))
@@ -367,51 +382,43 @@ func CreateBackup(projectName string) error {
 		return fmt.Errorf("failed to create backup directory: %w", err)
 	}
 
-	// 2. Dump the database
-	utils.LogInfo("Dumping database for site '%s'...", projectName)
-	dbDumpCmd := fmt.Sprintf("cd %s && docker compose -f docker-compose.yml exec -T -e MYSQL_PWD='%s' %s_db mariadb-dump -u root %s > %s/%s", remotePath, site.DBPassword, projectName, site.DBName, remotePath, dbBackupFile)
+	// 2. Dump the database directly into the backup directory
+	utils.LogInfo("Dumping database for site '%s'வுகளை...", projectName)
+	dbDumpCmd := fmt.Sprintf("cd %s && docker compose -f docker-compose.yml exec -T -e MYSQL_PWD='%s' %s_db mariadb-dump -u root %s > %s", remotePath, site.DBPassword, projectName, site.DBName, dbBackupPath)
 	_, _, err = RunSSHCommand(sshClient, dbDumpCmd)
 	if err != nil {
-		LogActivity(fmt.Sprintf("Failed to dump database for site '%s'.", projectName))
+		LogActivity("error", fmt.Sprintf("Failed to dump database for site '%s'.", projectName), projectName)
 		return fmt.Errorf("failed to dump database: %w", err)
 	}
 
-	// 3. Archive the wp-content directory
-	utils.LogInfo("Archiving wp-content for site '%s'...", projectName)
-	filesArchiveCmd := fmt.Sprintf("cd %s && docker compose -f docker-compose.yml exec -T %s_wordpress tar -czf - -C /var/www/html wp-content > %s", remotePath, projectName, filesBackupFile)
+	// 3. Archive the wp-content directory directly into the backup directory
+	utils.LogInfo("Archiving wp-content for site '%s'வுகளை...", projectName)
+	filesArchiveCmd := fmt.Sprintf("cd %s && docker compose -f docker-compose.yml exec -T %s_wordpress tar -czf - -C /var/www/html wp-content > %s", remotePath, projectName, filesBackupPath)
 	_, _, err = RunSSHCommand(sshClient, filesArchiveCmd)
 	if err != nil {
-		LogActivity(fmt.Sprintf("Failed to archive files for site '%s'.", projectName))
+		LogActivity("error", fmt.Sprintf("Failed to archive files for site '%s'.", projectName), projectName)
 		return fmt.Errorf("failed to archive files: %w", err)
 	}
 
-	// 4. Bundle database and files into a single archive
+	// 4. Bundle database and files into a single archive in the backup directory
 	utils.LogInfo("Bundling backup for site '%s'வுகளை...", projectName)
-	bundleCmd := fmt.Sprintf("cd %s && tar -czf %s %s %s", remotePath, finalBackupFile, dbBackupFile, filesBackupFile)
+	bundleCmd := fmt.Sprintf("cd %s && tar -czf %s %s %s", backupDir, finalBackupFile, dbBackupFile, filesBackupFile)
 	_, _, err = RunSSHCommand(sshClient, bundleCmd)
 	if err != nil {
-		LogActivity(fmt.Sprintf("Failed to bundle backup for site '%s'.", projectName))
+		LogActivity("error", fmt.Sprintf("Failed to bundle backup for site '%s'.", projectName), projectName)
 		return fmt.Errorf("failed to bundle backup: %w", err)
 	}
 
-	// 5. Move final backup to the central backup directory
-	utils.LogInfo("Moving final backup to %s", backupDir)
-	moveCmd := fmt.Sprintf("mv %s/%s %s/", remotePath, finalBackupFile, backupDir)
-	_, _, err = RunSSHCommand(sshClient, moveCmd)
-	if err != nil {
-		return fmt.Errorf("failed to move backup to final destination: %w", err)
-	}
-
-	// 6. Clean up temporary files
+	// 5. Clean up temporary files from the backup directory
 	utils.LogInfo("Cleaning up temporary files for site '%s'வுகளை...", projectName)
-	cleanupCmd := fmt.Sprintf("rm %s/%s %s/%s", remotePath, dbBackupFile, remotePath, filesBackupFile)
+	cleanupCmd := fmt.Sprintf("rm %s %s", dbBackupPath, filesBackupPath)
 	_, _, err = RunSSHCommand(sshClient, cleanupCmd)
 	if err != nil {
 		// This is not a fatal error, so just log it
 		utils.LogError("Failed to clean up temporary backup files: %v", err)
 	}
 
-	LogActivity(fmt.Sprintf("Backup created successfully for site '%s'.", projectName))
+	LogActivity("info", fmt.Sprintf("Backup created successfully for site '%s'.", projectName), projectName)
 	utils.LogInfo("Backup for site '%s' completed successfully.", projectName)
 
 	return nil
@@ -481,7 +488,7 @@ func RestoreBackup(projectName, backupFile string) error {
 		return fmt.Errorf("site '%s' not found", projectName)
 	}
 
-	LogActivity(fmt.Sprintf("Restore initiated for site '%s' from backup '%s'.", projectName, backupFile))
+	LogActivity("info", fmt.Sprintf("Restore initiated for site '%s' from backup '%s'.", projectName, backupFile), projectName)
 
 	remotePath := fmt.Sprintf("/var/www/%s", projectName)
 	backupDir := fmt.Sprintf("/var/www/backups/%s", projectName)
@@ -532,7 +539,7 @@ func RestoreBackup(projectName, backupFile string) error {
 	utils.LogInfo("Site '%s' stopped successfully.", projectName)
 
 	// 4. Start db service
-	utils.LogInfo("Starting db service for site '%s'...", projectName)
+	utils.LogInfo("Starting db service for site '%s'வுகளை...", projectName)
 	startDbCmd := fmt.Sprintf("cd %s && docker compose -f docker-compose.yml start %s_db", remotePath, projectName)
 	stdout, stderr, err = RunSSHCommand(sshClient, startDbCmd)
 	if err != nil {
@@ -542,14 +549,14 @@ func RestoreBackup(projectName, backupFile string) error {
 	utils.LogInfo("db service for site '%s' started successfully.", projectName)
 
 	// Wait for the container to be healthy
-	utils.LogInfo("Waiting for db container to be healthy for site '%s'...", projectName)
+	utils.LogInfo("Waiting for db container to be healthy for site '%s'வுகளை...", projectName)
 	if err := waitForContainerHealthy(sshClient, projectName, "_db", remotePath); err != nil {
 		return fmt.Errorf("db container did not become ready: %w", err)
 	}
 	utils.LogInfo("db container for site '%s' is ready.", projectName)
 
 	// 5. Restore the database
-	utils.LogInfo("Restoring database for site '%s'...", projectName)
+	utils.LogInfo("Restoring database for site '%s'வுகளை...", projectName)
 	dbRestoreCmd := fmt.Sprintf("cd %s && cat %s | docker compose -f docker-compose.yml exec -T -e MYSQL_PWD='%s' %s_db mariadb -u root %s", remotePath, dbBackupFile, site.DBPassword, projectName, site.DBName)
 	stdout, stderr, err = RunSSHCommand(sshClient, dbRestoreCmd)
 	if err != nil {
@@ -559,7 +566,7 @@ func RestoreBackup(projectName, backupFile string) error {
 	utils.LogInfo("Database for site '%s' restored successfully.", projectName)
 
 	// 6. Start wordpress service
-	utils.LogInfo("Starting wordpress service for site '%s'...", projectName)
+	utils.LogInfo("Starting wordpress service for site '%s'வுகளை...", projectName)
 	startWpCmd := fmt.Sprintf("cd %s && docker compose -f docker-compose.yml start %s_wordpress", remotePath, projectName)
 	stdout, stderr, err = RunSSHCommand(sshClient, startWpCmd)
 	if err != nil {
@@ -569,7 +576,7 @@ func RestoreBackup(projectName, backupFile string) error {
 	utils.LogInfo("wordpress service for site '%s' started successfully.", projectName)
 
 	// 7. Restore the wp-content directory
-	utils.LogInfo("Restoring wp-content for site '%s'...", projectName)
+	utils.LogInfo("Restoring wp-content for site '%s'வுகளை...", projectName)
 	// Create a temporary directory inside the container
 	tmpRestoreDir := "/tmp/restore_wp_content"
 	mkdirCmd := fmt.Sprintf("cd %s && docker compose -f docker-compose.yml exec -T %s_wordpress mkdir -p %s", remotePath, projectName, tmpRestoreDir)
@@ -622,12 +629,8 @@ func RestoreBackup(projectName, backupFile string) error {
 	}
 	utils.LogInfo("All services for site '%s' started successfully.", projectName)
 
-	LogActivity(fmt.Sprintf("Site '%s' restored successfully from backup '%s'.", projectName, backupFile))
+	LogActivity("info", fmt.Sprintf("Site '%s' restored successfully from backup '%s'.", projectName, backupFile), projectName)
 	utils.LogInfo("Site '%s' restored successfully.", projectName)
 
 	return nil
 }
-
-
-
-

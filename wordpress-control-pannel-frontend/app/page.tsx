@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import useSWR, { mutate } from "swr"
+import useSWR, { mutate, useSWRConfig } from "swr"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -26,6 +26,7 @@ import {
   Shield,
   AlertTriangle,
   Loader2,
+  RefreshCw,
 } from "lucide-react"
 import {
   DropdownMenu,
@@ -63,6 +64,7 @@ type Site = {
   adminUsername: string
   adminPassword: string
   lastChecked: string
+  pending?: boolean
 }
 
 type Plugin = {
@@ -74,8 +76,10 @@ type Plugin = {
 };
 
 type ActivityLog = {
-  action: string
+  message: string
   timestamp: string
+  level: "info" | "error"
+  projectName?: string
 }
 
 type VPSStats = {
@@ -93,6 +97,11 @@ const fetcher = (url: string, token: string | null) =>
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
+    if (res.status === 401) {
+      const error = new Error("Session expired. Please log in again.")
+      error.name = "AuthError"
+      throw error
+    }
     if (!res.ok) {
       const error = new Error("An error occurred while fetching the data.")
       throw error
@@ -109,11 +118,29 @@ export default function VPSSiteWeaver() {
   const [isRestartingSite, setIsRestartingSite] = useState(false)
   const [isCreatingBackup, setIsCreatingBackup] = useState(false)
   const [isRestoringBackup, setIsRestoringBackup] = useState(false)
+  const [restoringBackupName, setRestoringBackupName] = useState<string | null>(null)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [showPassword, setShowPassword] = useState<{ [key: string]: boolean }>({})
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true)
   const [token, setToken] = useState<string | null>(null)
+
+  const swrConfig = useSWRConfig()
+
+  useEffect(() => {
+    swrConfig.onError = (error, key) => {
+      if (error.name === "AuthError") {
+        setToken(null)
+        localStorage.removeItem("jwt_token")
+        setCurrentView("login")
+        toast({
+          title: "Session Expired",
+          description: "Please log in again.",
+          variant: "destructive",
+        })
+      }
+    }
+  }, [swrConfig])
 
   const { data: sites = [], error: sitesError } = useSWR<Site[]>(
     token ? [`${API_BASE_URL}/sites`, token] : null,
@@ -143,7 +170,7 @@ export default function VPSSiteWeaver() {
     token && selectedSite ? [`${API_BASE_URL}/sites/${selectedSite.projectName}/plugins`, token] : null,
     ([url, token]) => fetcher(url, token),
     {
-      refreshInterval: 10000, // Poll every 10 seconds
+      refreshInterval: 120000, // Poll every 120 seconds
     },
   )
 
@@ -256,6 +283,26 @@ export default function VPSSiteWeaver() {
     }
 
     setIsCreating(true)
+    const tempProjectName = newSite.name
+
+    // Optimistic UI Update
+    const optimisticSite: Site = {
+      projectName: newSite.name,
+      siteURL: `${newSite.subdomain}.myvps.com`,
+      status: "creating",
+      pending: true,
+      wpPort: 0,
+      dbName: "",
+      dbPassword: "",
+      plugins: [],
+      adminUsername: newSite.adminUsername,
+      adminPassword: newSite.adminPassword,
+      lastChecked: new Date().toISOString(),
+    }
+
+    mutate([`${API_BASE_URL}/sites`, token], (currentSites: Site[] = []) => [...currentSites, optimisticSite], false)
+    setIsCreateModalOpen(false)
+
     try {
       const formData = new FormData()
       formData.append("projectName", newSite.name)
@@ -283,7 +330,6 @@ export default function VPSSiteWeaver() {
         title: "Website creation started",
         description: data.message,
       })
-      setIsCreateModalOpen(false)
       mutate([`${API_BASE_URL}/sites`, token]) // Revalidate sites
       mutate([`${API_BASE_URL}/activities`, token]) // Revalidate activities
     } catch (error: any) {
@@ -293,6 +339,12 @@ export default function VPSSiteWeaver() {
         description: `Failed to create site: ${error.message || error}`,
         variant: "destructive",
       })
+      // Revert the optimistic update on error
+      mutate(
+        [`${API_BASE_URL}/sites`, token],
+        (currentSites: Site[] = []) => currentSites.filter((site) => site.projectName !== tempProjectName),
+        false,
+      )
     } finally {
       setIsCreating(false)
       setNewSite({
@@ -313,6 +365,15 @@ export default function VPSSiteWeaver() {
   }
 
   const deleteSite = async (projectName: string) => {
+    const originalSites = sites
+
+    // Optimistic UI Update
+    mutate(
+      [`${API_BASE_URL}/sites`, token],
+      (currentSites: Site[] = []) => currentSites.filter((site) => site.projectName !== projectName),
+      false,
+    )
+
     setIsDeletingSite(true)
     try {
       const response = await fetch(`${API_BASE_URL}/sites/${projectName}`, {
@@ -332,7 +393,6 @@ export default function VPSSiteWeaver() {
         title: "Website deleted",
         description: data.message,
       })
-      mutate([`${API_BASE_URL}/sites`, token]) // Revalidate sites
       mutate([`${API_BASE_URL}/activities`, token]) // Revalidate activities
       setCurrentView("sites") // Go back to sites list after deletion
     } catch (error: any) {
@@ -342,6 +402,8 @@ export default function VPSSiteWeaver() {
         description: `Failed to delete site: ${error.message || error}`,
         variant: "destructive",
       })
+      // Revert the optimistic update on error
+      mutate([`${API_BASE_URL}/sites`, token], originalSites, false)
     } finally {
       setIsDeletingSite(false)
     }
@@ -421,6 +483,7 @@ export default function VPSSiteWeaver() {
     }
 
     setIsRestoringBackup(true);
+    setRestoringBackupName(backupFile);
     try {
       const response = await fetch(`${API_BASE_URL}/sites/${selectedSite.projectName}/backups/restore`, {
         method: "POST",
@@ -451,8 +514,14 @@ export default function VPSSiteWeaver() {
       });
     } finally {
       setIsRestoringBackup(false);
+      setRestoringBackupName(null);
     }
   };
+
+  const handleLoginSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    handleLogin();
+  }
 
   const handleLogin = async () => {
     setIsLoggingIn(true)
@@ -907,13 +976,35 @@ export default function VPSSiteWeaver() {
             </div>
           ) : (
             <div className="space-y-3">
-              {activities.slice(0, 5).map((activity, index) => (
+              {(activities || []).slice(0, 5).map((activity, index) => (
                 <div
                   key={index}
                   className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0"
                 >
-                  <span className="text-slate-700 text-sm">{activity.action}</span>
-                  <span className="text-xs text-slate-500">{activity.timestamp}</span>
+                  <span
+                    className={cn(
+                      "text-slate-700 text-sm",
+                      activity.level === "error" && "text-red-600",
+                    )}
+                  >
+                    {activity.message}
+                    {activity.projectName && (
+                      <Button
+                        variant="link"
+                        className="p-0 h-auto ml-2 text-indigo-600"
+                        onClick={() => {
+                          const site = sites.find((s) => s.projectName === activity.projectName)
+                          if (site) {
+                            setSelectedSite(site)
+                            setCurrentView("site-detail")
+                          }
+                        }}
+                      >
+                        (View Site)
+                      </Button>
+                    )}
+                  </span>
+                  <span className="text-xs text-slate-500">{new Date(activity.timestamp).toLocaleString()}</span>
                 </div>
               ))}
             </div>
@@ -1107,7 +1198,7 @@ export default function VPSSiteWeaver() {
               </TableRow>
             ) : (
               (sites || []).map((site) => (
-                <TableRow key={site.projectName} className="hover:bg-slate-50">
+                <TableRow key={site.projectName} className={cn("hover:bg-slate-50", site.pending && "opacity-50 animate-pulse")}>
                   <TableCell className="py-3">{getStatusBadge(site.status)}</TableCell>
                   <TableCell className="py-3">
                     <Button
@@ -1361,8 +1452,16 @@ export default function VPSSiteWeaver() {
             </Card>
 
             <Card className="shadow-sm">
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between pb-4">
                 <CardTitle className="text-lg font-medium text-slate-800">Active Plugins</CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => mutate([`${API_BASE_URL}/sites/${selectedSite.projectName}/plugins`, token])}
+                >
+                  <RefreshCw className="mr-2 h-4 w-4" />
+                  Refresh
+                </Button>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -1403,11 +1502,17 @@ export default function VPSSiteWeaver() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
+                  {isCreatingBackup && (
+                    <div className="flex items-center justify-between py-2 border-b border-slate-100 last:border-0 opacity-50 animate-pulse">
+                      <span className="text-slate-700 font-mono text-sm">Creating new backup...</span>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    </div>
+                  )}
                   {!backups && !backupsError ? (
                     <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
                   ) : backupsError ? (
                     <p className="text-red-500 text-sm">Failed to load backups.</p>
-                  ) : backups.length === 0 ? (
+                  ) : backups.length === 0 && !isCreatingBackup ? (
                     <p className="text-slate-500 text-sm">No backups found for this site.</p>
                   ) : (
                     backups.map((backup, index) => (
@@ -1417,8 +1522,15 @@ export default function VPSSiteWeaver() {
                       >
                         <span className="text-slate-700 font-mono text-sm">{backup}</span>
                         <div>
-                          <Button variant="outline" size="sm" onClick={() => handleRestoreBackup(backup)} disabled={isRestoringBackup}>
-                            {isRestoringBackup && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleRestoreBackup(backup)}
+                            disabled={isRestoringBackup}
+                          >
+                            {isRestoringBackup && restoringBackupName === backup && (
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            )}
                             Restore
                           </Button>
                           <Button variant="ghost" size="icon" className="ml-2 text-red-600 hover:text-red-700">
@@ -1489,30 +1601,32 @@ export default function VPSSiteWeaver() {
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">Login to VPS Site Weaver</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              placeholder="admin"
-              value={loginForm.username}
-              onChange={(e) => setLoginForm((prev) => ({ ...prev, username: e.target.value }))}
-            />
-          </div>
-          <div>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="password"
-              value={loginForm.password}
-              onChange={(e) => setLoginForm((prev) => ({ ...prev, password: e.target.value }))}
-            />
-          </div>
-          <Button onClick={handleLogin} className="w-full bg-indigo-600 hover:bg-indigo-700" disabled={isLoggingIn}>
-            {isLoggingIn && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Login
-          </Button>
+        <CardContent>
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                placeholder="admin"
+                value={loginForm.username}
+                onChange={(e) => setLoginForm((prev) => ({ ...prev, username: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="password"
+                value={loginForm.password}
+                onChange={(e) => setLoginForm((prev) => ({ ...prev, password: e.target.value }))}
+              />
+            </div>
+            <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700" disabled={isLoggingIn}>
+              {isLoggingIn && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Login
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>
